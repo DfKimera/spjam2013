@@ -4,6 +4,8 @@ package scenes {
 	import engine.Prop;
 	import engine.Scene;
 
+	import props.TestProp;
+
 	public class StartingScene extends Scene {
 
 		[Embed(source="../../assets/scene_start.png")]
@@ -23,7 +25,7 @@ package scenes {
 		 */
 		public override function create():void {
 
-
+			Prop.placeOnScene(this, new TestProp(), 100, 100);
 
 			super.create();
 
