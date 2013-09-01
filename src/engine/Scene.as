@@ -61,7 +61,13 @@ package engine {
 
 			FlxG.flash(0xff000000, this.fadeInDelay);
 
-			inventory = new Inventory(this);
+			if(hasInventoryEnabled()) {
+				inventory = new Inventory(this);
+			}
+		}
+
+		protected function hasInventoryEnabled():Boolean {
+			return true;
 		}
 
 		/**

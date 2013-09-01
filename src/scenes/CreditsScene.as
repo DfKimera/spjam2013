@@ -1,12 +1,14 @@
 package scenes {
 
 	import engine.UIScene;
-	import org.flixel.FlxText;
 
 	public class CreditsScene extends UIScene {
 
-		public override function create():void {
-			add(new FlxText(20, 20, 200, "Credits (not implemented"));
+		[Embed(source="../../assets/credits_screen.png")]
+		public var BACKGROUND_SPRITE:Class;
+
+		public override function prepare():void {
+			setBackground(BACKGROUND_SPRITE);
 		}
 
 	}

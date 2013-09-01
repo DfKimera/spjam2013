@@ -10,5 +10,9 @@ package engine {
 			}
 		}
 
+		protected override function hasInventoryEnabled():Boolean {
+			return false;
+		}
+
 	}
 }

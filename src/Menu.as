@@ -1,99 +1,111 @@
 package {
-	import flash.ui.Keyboard;
 
 	import org.flixel.FlxG;
+	import org.flixel.FlxGroup;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
-	import org.flixel.FlxText;
-	import org.flixel.FlxU;
 
 	public class Menu extends FlxState {
 
-		public const COLOR_UNSELECTED:uint = 0x777777;
-		public const COLOR_SELECTED:uint = 0xFFFFFF;
-
-		public var options:Array = ['Start Game', 'Credits', 'Settings'];
-
-		private var offsetY:int = 200;
+		private var buttonOffset:Array = [260, 300];
+		private var buttonHeight:int = 60;
 		private var baseY:int = 0;
 
-		public var logo:FlxText;
-		public var optionLabels:Array = [];
+		[Embed(source="../assets/menu_background.png")]
+		public var BACKGROUND_SPRITE:Class;
+
+		public var background:FlxSprite;
+		public var optionIndex:Array = [];
+		public var options:Array = [];
+		public var $options:FlxGroup = new FlxGroup();
 
 		public var selectedOption:int = 0;
 
 		public function Menu() {
 
-			logo = new FlxText(20, 20, 200, "SPJAM 2013");
-			logo.size = 36;
-			add(logo);
+			background = new FlxSprite(0,0);
+			background.loadGraphic(BACKGROUND_SPRITE);
+			add(background);
 
+			baseY = buttonOffset[1];
 			createOptions();
+			add($options);
 
+			selectOption("Jogar");
 		}
 
 		public function createOptions():void {
 
+			addOption("Jogar", function():void {
+				Game.start();
+			});
+
+			addOption("Créditos", function():void {
+				Game.openCredits();
+			});
+
+		}
+
+		public function triggerOption(name:String):void {
+			trace("Menu (trigger): ", name, options[name]);
+			(options[name] as MenuOption).trigger();
+		}
+
+		public function addOption(name:String,  callback:Function):void {
+
+			var option:MenuOption = new MenuOption(name, callback);
+			option.x = buttonOffset[0];
+			option.y = baseY;
+
+			options[name] = option;
+			optionIndex.push(name);
+			$options.add(option);
+
+			baseY += buttonHeight;
+
+		}
+
+		public function unselectOptions():void {
 			for(var i:String in options) {
-				addOption(i,  options[i]);
+				(options[i] as MenuOption).setOff();
 			}
-
 		}
 
-		public function triggerOption(id:int):void {
-
-			switch(options[id]) {
-
-				case "Start Game":
-					Game.start();
-					break;
-
-				case "Credits":
-					Game.openCredits();
-					break;
-
-				case "Settings":
-					Game.openSettings();
-					break;
-
-			}
-
-		}
-
-		public function addOption(id:String,  name:String):void {
-			optionLabels[id] = new FlxText(20, offsetY + baseY, 200, name);
-			optionLabels[id].size = 16;
-			optionLabels[id].color = COLOR_UNSELECTED;
-			baseY += 35;
-
-			add(optionLabels[id]);
+		public function selectOption(name:String):void {
+			(options[name] as MenuOption).setOn();
 		}
 
 		public override function update():void {
 
-			optionLabels[selectedOption].color = COLOR_UNSELECTED;
+			unselectOptions();
 
 			if(FlxG.keys.justPressed("DOWN")) {
 
 				selectedOption += 1;
 
-				if(selectedOption >= options.length) {
+				if(selectedOption >= optionIndex.length) {
 					selectedOption = 0;
 				}
+
+				trace("Menu (down): ", selectedOption, optionIndex[selectedOption], options[optionIndex[selectedOption]]);
 
 			} else if(FlxG.keys.justPressed("UP")) {
 
 				selectedOption -= 1;
 
 				if(selectedOption < 0) {
-					selectedOption = options.length - 1;
+					selectedOption = optionIndex.length - 1;
 				}
 
+				trace("Menu (up): ", selectedOption, optionIndex[selectedOption], options[optionIndex[selectedOption]]);
+
 			} else if(FlxG.keys.justPressed("ENTER")) {
-				triggerOption(selectedOption);
+				triggerOption(optionIndex[selectedOption]);
 			}
 
-			optionLabels[selectedOption].color = COLOR_SELECTED;
+			selectOption(optionIndex[selectedOption]);
+
+			super.update();
 
 		}
 
