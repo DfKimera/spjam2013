@@ -1,0 +1,133 @@
+package engine {
+
+	import flash.utils.getQualifiedClassName;
+	import org.flixel.FlxG;
+	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+
+	public class Item extends FlxExtendedSprite {
+
+		private var graphicIcon:Class;
+		private var graphicPlaced:Class;
+
+		public var icon:FlxExtendedSprite;
+		public var placed:FlxExtendedSprite;
+
+		public function Item(graphicIcon:Class, graphicPlaced:Class) {
+			this.graphicIcon = graphicIcon;
+			this.graphicPlaced = graphicPlaced;
+
+			icon = generateIcon();
+
+			placed = new FlxExtendedSprite(0,0);
+			placed.loadGraphic(graphicPlaced, false, false);
+			placed.mouseReleasedCallback = this._onPick;
+		}
+
+		/**
+		 * Generates a sprite icon to represent this item.
+		 * @return FlxExtendedSprite
+		 */
+		public function generateIcon():FlxExtendedSprite {
+			var icon:FlxExtendedSprite = new FlxExtendedSprite(0,0);
+			icon.loadGraphic(graphicIcon, false, false, 80, 80);
+			icon.name = getQualifiedClassName(this);
+			return icon;
+		}
+
+		/**
+		 * @abstract
+		 * Called when this item is picked from the scene.
+		 */
+		public function onPick():void {}
+
+		/**
+		 * @abstract
+		 * Called when this item (target) is combined with another (origin).
+		 * @param item Item
+		 */
+		public function onCombine(item:Item):void {}
+
+		/**
+		 * @abstract
+		 * Called when this item is consumed.
+		 */
+		public function onConsume():void {}
+
+		/**
+		 * Consumes this item, removing it from the inventory and game.
+		 */
+		public function consume():void {
+			trace("Item consumed: ", this);
+
+			this.onConsume();
+			Inventory.removeFromInventory(this);
+
+			icon.kill();
+			icon.destroy();
+
+			placed.kill();
+			placed.destroy();
+
+			this.kill();
+			this.destroy();
+		}
+
+		/**
+		 * @internal
+		 * Internal handler for item pick.
+		 * @param spr
+		 * @param x
+		 * @param y
+		 */
+		public function _onPick(spr:FlxExtendedSprite, x:int, y:int):void {
+
+			trace("Item added to inventory: ",this);
+
+			Inventory.addToInventory(this);
+
+			this.onPick();
+
+			if(FlxG.state is Scene) {
+				trace("Item removed from scene: ", FlxG.state);
+				(FlxG.state as Scene).items.remove(placed);
+				(FlxG.state as Scene).onItemPick(this);
+			}
+
+		}
+
+		/**
+		 * @internal
+		 * Internal handler for item combine.
+		 * @param item
+		 */
+		public function _onCombine(item:Item):void {
+			trace("Combining items: ", this, item);
+			this.onCombine(item);
+			(FlxG.state as Scene).onItemCombine(this, item);
+		}
+
+		// -------------------------------------------------------------------------------------------------------------
+
+		/**
+		 * Places an item instance on the scene, but only if the player hasn't picked it yet.
+		 * @param scene Scene The scene.
+		 * @param item Item The item.
+		 * @param x int The position of the item on the scene.
+		 * @param y int
+		 */
+		public static function placeOnScene(scene:Scene, item:Item, x:int, y:int):void {
+
+			if(Inventory.hasItem(item)) {
+				trace("Skipping scene placement of item: ", item, "(player already picked)");
+				return;
+			}
+
+			trace("Item placed on scene: ", scene, item, x, y);
+
+			item.x = x;
+			item.y = y;
+			scene.items.add(item.placed);
+
+		}
+	}
+}
