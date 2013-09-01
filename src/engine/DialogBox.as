@@ -32,13 +32,13 @@ package engine {
 
 		public var background:FlxSprite;
 		public var portrait:FlxSprite;
-		public var portraitOffset:Array = [11,11];
+		public var portraitOffset:Array = [10,16];
 
 		public var title:FlxText;
-		public var titleOffset:Array = [125, 25, 650];
+		public var titleOffset:Array = [125, 22, 610];
 
 		public var text:FlxText;
-		public var textOffset:Array = [125, 50, 650];
+		public var textOffset:Array = [125, 52, 610];
 
 		public function DialogBox(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top") {
 
@@ -53,10 +53,10 @@ package engine {
 			this.fxBuffer = message.split('').reverse();
 
 			this.expression = expression;
-			this.offsetY = (this.position == "bottom") ? (FlxG.height - 120) : 0;
+			this.offsetY = (this.position == "bottom") ? (FlxG.height - 130) : 0;
 
 			background = new FlxSprite(0, offsetY);
-			background.loadGraphic(BACKGROUND, false, false, 800, 120);
+			background.loadGraphic(BACKGROUND, false, false, 800, 130);
 			add(background);
 
 			portrait = character.getPortrait(expression);
@@ -64,7 +64,7 @@ package engine {
 			add(portrait);
 
 			title = new FlxText(titleOffset[0], titleOffset[1] + offsetY, titleOffset[2], character.characterName);
-			title.setFormat("dpcomic", 24, 0xffcc00, "left", 0xFF000000);
+			title.setFormat("dpcomic", 24, 0x9ee03f, "left", 0xFF000000);
 			add(title);
 
 			text = new FlxText(textOffset[0], textOffset[1] + offsetY, textOffset[2], "");

@@ -16,19 +16,32 @@ package engine {
 		[Embed(source="../../assets/inventory_background.png")]
 		public static var BACKGROUND:Class;
 
+		[Embed(source="../../assets/inventory_icon.png")]
+		public static var BUTTON:Class;
+
+		[Embed(source="../../assets/inventory_icon_open.png")]
+		public static var BUTTON_OPEN:Class;
+
+		public var button:FlxExtendedSprite;
+
 		private var scene:Scene;
 		public var $items:FlxGroup = new FlxGroup();
 		public var background:FlxSprite;
 
 		public var isOpen:Boolean = false;
 
-		public var itemPositionOffset:Array = [210,120];
-		public var itemMargin:int = 10;
+		public var itemPositionOffset:Array = [285,437];
+		public var itemMargin:int = 9;
 		public var currentItem:int = 0;
-		public var maxItemsPerRow:int = 4;
+		public var maxItemsPerRow:int = 5;
 
 		public function Inventory(scene:Scene) {
 			Inventory.invGrid =  this;
+
+			button = new FlxExtendedSprite(FlxG.width - 100, FlxG.height - 100);
+			button.loadGraphic(BUTTON);
+			button.mouseReleasedCallback = this.onButtonClick;
+			scene.ui.add(button);
 
 			this.scene = scene;
 
@@ -93,14 +106,24 @@ package engine {
 
 		private function show():void {
 			trace("Opening inventory: ", this,  this.scene);
-			this.scene.add(this);
+			this.scene.invLayer.add(this);
 			this.isOpen = true;
+			this.button.loadGraphic(BUTTON_OPEN);
 		}
 
 		private function hide():void {
 			trace("Hiding inventory: ", this,  this.scene);
-			this.scene.remove(this);
+			this.scene.invLayer.remove(this);
 			this.isOpen = false;
+			this.button.loadGraphic(BUTTON);
+		}
+
+		private function onButtonClick(btn:FlxExtendedSprite, x:int, y:int):void {
+			if(this.isOpen) {
+				this.hide();
+			} else {
+				this.show();
+			}
 		}
 
 		// -------------------------------------------------------------------------------------------------------------

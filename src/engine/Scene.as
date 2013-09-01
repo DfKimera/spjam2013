@@ -17,6 +17,7 @@ package engine {
 
 		public var props:FlxGroup = new FlxGroup();
 		public var items:FlxGroup = new FlxGroup();
+		public var invLayer:FlxGroup = new FlxGroup();
 		public var ui:FlxGroup = new FlxGroup();
 
 		public var selectedItemIcon:FlxExtendedSprite;
@@ -53,6 +54,7 @@ package engine {
 
 			add(props);
 			add(items);
+			add(invLayer);
 			add(ui);
 
 			trace("Done, displaying...");
