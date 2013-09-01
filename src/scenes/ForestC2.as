@@ -4,9 +4,9 @@ package scenes {
 	import engine.Prop;
 	import engine.Scene;
 
-	public class StartingScene extends Scene {
+	public class ForestC2 extends Scene {
 
-		[Embed(source="../../assets/scene_start.png")]
+		[Embed(source="../../assets/scene_c2.png")]
 		public var BACKGROUND:Class;
 
 		/**
