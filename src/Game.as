@@ -1,4 +1,5 @@
 package {
+	import engine.Cursor;
 	import engine.Scene;
 
 	import org.flixel.FlxG;
@@ -15,12 +16,20 @@ package {
 
 		public function Game() {
 			Game.instance = this;
-			super(800, 600, Menu, 1, 60, 30, true);
+			super(800, 600, Menu, 1, 60, 30, false);
+
+			Cursor.useArrow();
 
 			if (FlxG.getPlugin(FlxMouseControl) == null) {
 				FlxG.addPlugin(new FlxMouseControl);
 			}
 
+		}
+
+		protected override function update():void {
+			Cursor.reset();
+			super.update();
+			Cursor.update();
 		}
 
 		/**
@@ -61,6 +70,10 @@ package {
 				FlxG.switchState(scene);
 
 			});
+		}
+
+		public static function setArrowCursor():void {
+			FlxG.mouse.load()
 		}
 
 	}

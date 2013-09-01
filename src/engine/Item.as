@@ -1,10 +1,12 @@
 package engine {
 
 	import flash.utils.getQualifiedClassName;
+
+	import org.flixel.FlxBasic;
 	import org.flixel.FlxG;
 	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
-	public class Item extends FlxExtendedSprite {
+	public class Item extends FlxBasic {
 
 		private var graphicIcon:Class;
 		private var graphicPlaced:Class;
@@ -21,6 +23,12 @@ package engine {
 			placed = new FlxExtendedSprite(0,0);
 			placed.loadGraphic(graphicPlaced, false, false);
 			placed.mouseReleasedCallback = this._onPick;
+			placed.onUpdate = function():void {
+				if(placed.mouseOver) {
+					Cursor.useHand();
+				}
+			};
+
 		}
 
 		/**
@@ -124,8 +132,8 @@ package engine {
 
 			trace("Item placed on scene: ", scene, item, x, y);
 
-			item.x = x;
-			item.y = y;
+			item.placed.x = x;
+			item.placed.y = y;
 			scene.items.add(item.placed);
 
 		}

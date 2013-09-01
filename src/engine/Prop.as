@@ -42,6 +42,18 @@ package engine {
 
 		}
 
+		public override function update():void {
+			super.update();
+
+			if(this.mouseOver) {
+				if(Inventory.isHoldingItem()) {
+					Cursor.useHand();
+				} else {
+					Cursor.useEye();
+				}
+			}
+		}
+
 		/**
 		 * @abstract
 		 * Called when the player interacts with this prop.

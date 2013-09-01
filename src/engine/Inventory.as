@@ -45,6 +45,7 @@ package engine {
 
 		private function generateGrid():void {
 			for(var itemType:String in Inventory.items) {
+				if(!Inventory.items[itemType]) { continue; }
 				placeItemOnGrid(Inventory.items[itemType]);
 			}
 		}

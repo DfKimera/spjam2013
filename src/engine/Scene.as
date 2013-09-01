@@ -1,5 +1,9 @@
 package engine {
 
+	import characters.TestCharacter;
+
+	import items.TestItem;
+
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxState;
@@ -71,12 +75,12 @@ package engine {
 				}
 			}
 
-			if(selectedItemIcon is FlxExtendedSprite) {
+			super.update();
+
+			if(Inventory.isHoldingItem()) {
 				selectedItemIcon.x = FlxG.mouse.x + 2;
 				selectedItemIcon.y = FlxG.mouse.y + 2;
 			}
-
-			super.update();
 
 		}
 
@@ -87,6 +91,7 @@ package engine {
 		public function holdItemOnCursor(item:Item):void {
 			selectedItemIcon = item.generateIcon();
 			add(selectedItemIcon);
+
 			trace("Holding item on cursor: ", selectedItemIcon);
 		}
 
@@ -124,9 +129,7 @@ package engine {
 		 * Called when the player interacts with a prop.
 		 * @param prop Prop The interacted prop.
 		 */
-		public function onPropInteract(prop:Prop):void {
-
-		}
+		public function onPropInteract(prop:Prop):void {}
 
 		/**
 		 * @abstract
@@ -134,18 +137,14 @@ package engine {
 		 * @param prop Prop The prop triggered.
 		 * @param item Item The item used.
 		 */
-		public function onItemUse(prop:Prop, item:Item):void {
-
-		}
+		public function onItemUse(prop:Prop, item:Item):void {}
 
 		/**
 		 * @abstract
 		 * Called when the player picks an item.
 		 * @param item Item The picked item.
 		 */
-		public function onItemPick(item:Item):void {
-
-		}
+		public function onItemPick(item:Item):void {}
 
 		/**
 		 * @abstract
@@ -153,9 +152,7 @@ package engine {
 		 * @param item1 Item The first item (target).
 		 * @param item2 Item The second item (origin).
 		 */
-		public function onItemCombine(item1:Item, item2:Item):void {
-
-		}
+		public function onItemCombine(item1:Item, item2:Item):void {}
 
 		/**
 		 * @abstract
@@ -163,9 +160,7 @@ package engine {
 		 * @param x int The X position.
 		 * @param y int The Y position.
 		 */
-		public function onBackgroundClick(x:int, y:int):void {
-
-		}
+		public function onBackgroundClick(x:int, y:int):void {}
 
 		/**
 		 * @internal

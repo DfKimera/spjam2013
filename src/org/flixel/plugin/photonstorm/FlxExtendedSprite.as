@@ -179,6 +179,11 @@ package org.flixel.plugin.photonstorm
 		 * By default the spring attaches to the top left of the sprite. To change this location provide a y offset (in pixels)
 		 */
 		public var springOffsetY:int;
+
+		/**
+		 * Called when the sprite is updated
+		 */
+		public var onUpdate:Function;
 		
 		/**
 		 * Creates a white 8x8 square <code>FlxExtendedSprite</code> at the specified position.
@@ -466,6 +471,10 @@ package org.flixel.plugin.photonstorm
 						mouseSpring.reset();
 					}
 				}
+			}
+
+			if(this.onUpdate is Function) {
+				this.onUpdate.call();
 			}
 			
 			super.update();
