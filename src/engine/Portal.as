@@ -27,6 +27,17 @@ package engine {
 			}
 		}
 
+		override protected function _onInteract(spr:FlxExtendedSprite, x:int, y:int):void {
+			super._onInteract(spr, x, y);
+
+			if(this.nextScene is Class) {
+				Inventory.releaseItemOnCursor();
+				Game.transitionToScene(new this.nextScene());
+			}
+		}
+
+		// -------------------------------------------------------------------------------------------------------------
+
 		public static function checkIfIs(prop:Prop, name:String):Boolean {
 			if(prop is Portal) {
 				if((prop as Portal).name == name) {
@@ -37,13 +48,8 @@ package engine {
 			return false;
 		}
 
-		override protected function _onInteract(spr:FlxExtendedSprite, x:int, y:int):void {
-			super._onInteract(spr, x, y);
-
-			if(this.nextScene is Class) {
-				Inventory.releaseItemOnCursor();
-				Game.transitionToScene(new this.nextScene());
-			}
+		public static function placeOnScene(scene:Scene, name:String, x:int, y:int, width:int, height:int, nextScene:Class = null):void {
+			Prop.placeOnScene(scene, new Portal(name, width, height, nextScene), x, y);
 		}
 
 	}
