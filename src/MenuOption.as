@@ -9,11 +9,12 @@ package {
 		private var onTriggerHandler:Function;
 		private var isOver:Boolean = false;
 
-		public function MenuOption(item:String, onClickHandler:Function) {
+		public function MenuOption(item:String, onTriggerHandler:Function) {
 
 			this.loadGraphic(SPRITE, true, false, 280, 60);
 
-			this.onTriggerHandler = onClickHandler;
+			this.onTriggerHandler = onTriggerHandler;
+			this.mouseReleasedCallback = this.onClick;
 			this.name = item;
 
 			switch(item) {
@@ -31,6 +32,10 @@ package {
 			play("off");
 
 
+		}
+
+		private function onClick(spr:FlxExtendedSprite, x:int, y:int):void {
+			this.trigger();
 		}
 
 		public function setOn():void {
@@ -52,7 +57,7 @@ package {
 
 			super.update();
 
-			if(isOver) {
+			if(isOver || this.mouseOver) {
 				play("on");
 			} else {
 				play("off");

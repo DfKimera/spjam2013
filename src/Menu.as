@@ -19,7 +19,7 @@ package {
 		public var options:Array = [];
 		public var $options:FlxGroup = new FlxGroup();
 
-		public var selectedOption:int = 0;
+		public var selectedOption:int = -1;
 
 		public function Menu() {
 
@@ -31,7 +31,6 @@ package {
 			createOptions();
 			add($options);
 
-			selectOption("Jogar");
 		}
 
 		public function createOptions():void {
@@ -103,7 +102,9 @@ package {
 				triggerOption(optionIndex[selectedOption]);
 			}
 
-			selectOption(optionIndex[selectedOption]);
+			if(selectedOption != -1) {
+				selectOption(optionIndex[selectedOption]);
+			}
 
 			super.update();
 
