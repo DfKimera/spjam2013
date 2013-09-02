@@ -5,7 +5,7 @@ package props {
 
 	public class Hole extends Prop {
 
-		[Embed("../../assets/prop_Hole.png")]
+		[Embed("../../assets/prop_hole.png")]
 		public var SPRITE:Class;
 
 		public function Hole() {

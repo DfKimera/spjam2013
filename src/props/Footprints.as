@@ -5,7 +5,7 @@ package props {
 
 	public class Footprints extends Prop {
 
-		[Embed("../../assets/prop_Footprints.png")]
+		[Embed("../../assets/prop_footprints.png")]
 		public var SPRITE:Class;
 
 		public function Footprints() {

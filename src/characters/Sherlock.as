@@ -3,21 +3,21 @@ package characters {
 	import engine.Character;
 	import engine.Item;
 
-	public class TestCharacter extends Character {
+	public class Sherlock extends Character {
 
-		[Embed("../../assets/prop_testcharacter.png")]
+		[Embed("../../assets/character_sherlock.png")]
 		public var SPRITE:Class;
 
-		[Embed("../../assets/portrait_testcharacter.jpg")]
+		[Embed("../../assets/portrait_sherlock.png")]
 		public var PORTRAIT_DEFAULT:Class;
 
-		public function TestCharacter() {
+		public function Sherlock() {
 			super();
 			loadGraphic(SPRITE);
 		}
 
 		public override function setCharacterInfo():void {
-			this.characterName = "Test Character";
+			this.characterName = "Xerox Holmes";
 			this.setPortraits({
 				'default': [PORTRAIT_DEFAULT, false]
 			});

@@ -5,7 +5,7 @@ package props {
 
 	public class Bush extends Prop {
 
-		[Embed("../../assets/prop_Bush.png")]
+		[Embed("../../assets/prop_bush.png")]
 		public var SPRITE:Class;
 
 		public function Bush() {

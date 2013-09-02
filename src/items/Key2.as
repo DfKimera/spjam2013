@@ -4,10 +4,10 @@ package items {
 
 	public class Key2 extends Item {
 
-		[Embed(source="../../assets/item_key2.png")]
+		[Embed(source="../../assets/item_key.png")]
 		public var ICON_SPRITE:Class;
 
-		[Embed(source="../../assets/item_key2_placed.png")]
+		[Embed(source="../../assets/item_keyglint.png")]
 		public var PLACED_SPRITE:Class;
 
 		public function Key2() {

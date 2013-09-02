@@ -5,7 +5,7 @@ package props {
 
 	public class Cage extends Prop {
 
-		[Embed("../../assets/prop_Cage.png")]
+		[Embed("../../assets/prop_cage.png")]
 		public var SPRITE:Class;
 
 		public function Cage() {

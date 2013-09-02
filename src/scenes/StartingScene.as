@@ -1,10 +1,14 @@
 package scenes {
 
+	import characters.Sherlock;
+
+	import engine.DialogBox;
+	import engine.Inventory;
 	import engine.Item;
 	import engine.Prop;
 	import engine.Scene;
 
-	import props.TestProp;
+	import items.ScissorsPiece1;
 
 	public class StartingScene extends Scene {
 
@@ -25,7 +29,11 @@ package scenes {
 		 */
 		public override function create():void {
 
-			Prop.placeOnScene(this, new TestProp(), 100, 100);
+			DialogBox.show(this, new Sherlock(), "Veja Watson! Pegadas!");
+			DialogBox.show(this, new Sherlock(), "Qual caminho devemos seguir?");
+
+			Prop.placeOnScene(this, new Sherlock(), 340, 275);
+			Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
 
 			super.create();
 
@@ -53,6 +61,12 @@ package scenes {
 		 * @param item Item The picked item.
 		 */
 		override public function onItemPick(item:Item):void {
+
+			if(item is ScissorsPiece1) {
+				// TODO: trocar fonte por uma com suporte unicode
+				DialogBox.show(this, new Sherlock(), "Não fique pegando lixo, Epson!");
+				Inventory.show();
+			}
 
 		}
 

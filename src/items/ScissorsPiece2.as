@@ -4,10 +4,10 @@ package items {
 
 	public class ScissorsPiece2 extends Item {
 
-		[Embed(source="../../assets/item_ScissorsPiece2.png")]
+		[Embed(source="../../assets/item_scissor_piece2.png")]
 		public var ICON_SPRITE:Class;
 
-		[Embed(source="../../assets/item_ScissorsPiece2_placed.png")]
+		[Embed(source="../../assets/item_scissor_piece2.png")]
 		public var PLACED_SPRITE:Class;
 
 		public function ScissorsPiece2() {

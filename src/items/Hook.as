@@ -7,7 +7,7 @@ package items {
 		[Embed(source="../../assets/item_hook.png")]
 		public var ICON_SPRITE:Class;
 
-		[Embed(source="../../assets/item_hook_placed.png")]
+		[Embed(source="../../assets/item_hook.png")]
 		public var PLACED_SPRITE:Class;
 
 		public function Hook() {

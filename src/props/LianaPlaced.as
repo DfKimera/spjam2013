@@ -3,12 +3,12 @@ package props {
 	import engine.Item;
 	import engine.Prop;
 
-	public class Liana_placed2 extends Prop {
+	public class LianaPlaced extends Prop {
 
-		[Embed("../../assets/prop_Liana_placed2.png")]
+		[Embed("../../assets/prop_liana_placed.png")]
 		public var SPRITE:Class;
 
-		public function Liana_placed2() {
+		public function LianaPlaced() {
 			super();
 			loadGraphic(SPRITE);
 		}

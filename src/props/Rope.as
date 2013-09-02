@@ -5,7 +5,7 @@ package props {
 
 	public class Rope extends Prop {
 
-		[Embed("../../assets/prop_Rope.png")]
+		[Embed("../../assets/prop_liana.png")]
 		public var SPRITE:Class;
 
 		public function Rope() {

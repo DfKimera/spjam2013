@@ -5,7 +5,7 @@ package props {
 
 	public class Rack extends Prop {
 
-		[Embed("../../assets/prop_Rack.png")]
+		[Embed("../../assets/prop_rack.png")]
 		public var SPRITE:Class;
 
 		public function Rack() {

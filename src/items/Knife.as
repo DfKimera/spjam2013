@@ -7,7 +7,7 @@ package items {
 		[Embed(source="../../assets/item_knife.png")]
 		public var ICON_SPRITE:Class;
 
-		[Embed(source="../../assets/item_knife_placed.png")]
+		[Embed(source="../../assets/item_knife.png")]
 		public var PLACED_SPRITE:Class;
 
 		public function Knife() {

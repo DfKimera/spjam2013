@@ -5,7 +5,7 @@ package props {
 
 	public class Gate extends Prop {
 
-		[Embed("../../assets/prop_Gate.png")]
+		[Embed("../../assets/prop_gate.png")]
 		public var SPRITE:Class;
 
 		public function Gate() {

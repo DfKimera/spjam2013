@@ -4,10 +4,10 @@ package items {
 
 	public class Plank extends Item {
 
-		[Embed(source="../../assets/item_Plank.png")]
+		[Embed(source="../../assets/item_plank.png")]
 		public var ICON_SPRITE:Class;
 
-		[Embed(source="../../assets/item_Plank_placed.png")]
+		[Embed(source="../../assets/item_plank_placed.png")]
 		public var PLACED_SPRITE:Class;
 
 		public function Plank() {

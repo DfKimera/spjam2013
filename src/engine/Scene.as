@@ -1,9 +1,5 @@
 package engine {
 
-	import characters.TestCharacter;
-
-	import items.TestItem;
-
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxState;

@@ -4,10 +4,10 @@ package items {
 
 	public class Liana extends Item {
 
-		[Embed(source="../../assets/item_Liana.png")]
+		[Embed(source="../../assets/item_liana.png")]
 		public var ICON_SPRITE:Class;
 
-		[Embed(source="../../assets/item_Liana_placed.png")]
+		[Embed(source="../../assets/item_liana_placed.png")]
 		public var PLACED_SPRITE:Class;
 
 		public function Liana() {
