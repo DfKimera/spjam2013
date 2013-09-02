@@ -26,7 +26,7 @@ package engine {
 
 		private var scene:Scene;
 		public var $items:FlxGroup = new FlxGroup();
-		public var background:FlxSprite;
+		public var background:FlxExtendedSprite;
 
 		public var isOpen:Boolean = false;
 
@@ -47,7 +47,7 @@ package engine {
 
 			trace("Inventory registered on scene: ", scene);
 
-			background = new FlxSprite(0,0);
+			background = new FlxExtendedSprite(0,0);
 			background.loadGraphic(BACKGROUND);
 
 			add(background);
@@ -213,6 +213,14 @@ package engine {
 			if(Inventory.invGrid is Inventory) {
 				Inventory.invGrid.redrawGrid();
 			}
+		}
+
+		/**
+		 * Checks if the mouse is over the inventory grid
+		 * @return Boolean
+		 */
+		public static function isMouseOver():Boolean {
+			return (Inventory.isOpen() && Inventory.invGrid.background.mouseOver);
 		}
 
 		/**
