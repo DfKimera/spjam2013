@@ -9,12 +9,15 @@ package scenes {
 	import engine.Scene;
 
 	import items.ScissorsPiece1;
-import items.ScissorsPiece2;
 
-public class StartingScene extends Scene {
+	import engine.Portal;
+
+	public class StartingScene extends Scene {
 
 		[Embed(source="../../assets/scene_start.png")]
 		public var BACKGROUND:Class;
+
+		public var sherlock:Sherlock;
 
 		/**
 		 * Called before the scene is created; should be used to set background and fade delays.
@@ -30,12 +33,18 @@ public class StartingScene extends Scene {
 		 */
 		public override function create():void {
 
-			DialogBox.show(this, new Sherlock(), "Veja Watson! Pegadas!");
-			DialogBox.show(this, new Sherlock(), "Qual caminho devemos seguir?");
+			sherlock = new Sherlock();
 
-			Prop.placeOnScene(this, new Sherlock(), 340, 275);
+			DialogBox.show(this, sherlock, "Veja Watson! Pegadas!");
+			DialogBox.show(this, sherlock, "Qual caminho devemos seguir?");
+
+			Portal.placeOnScene(this, "to_p1", 0, 80, 120, 400, ForestP1);
+			Portal.placeOnScene(this, "to_p2", 680, 80, 120, 400, ForestP2);
+
+			Prop.placeOnScene(this, sherlock, 540, 225);
+			Portal.placeOnScene(this, "footsteps", 350, 400, 270, 200);
+
 			Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
-			Item.placeOnScene(this, new ScissorsPiece2(), 500, 335);
 
 			super.create();
 
@@ -46,7 +55,9 @@ public class StartingScene extends Scene {
 		 * @param prop Prop The interacted prop.
 		 */
 		override public function onPropInteract(prop:Prop):void {
-
+			if(Portal.checkIfIs(prop, "footsteps")) {
+				DialogBox.show(this, sherlock, "Alguem não fez questão de esconder os rastros");
+			}
 		}
 
 		/**
@@ -66,7 +77,7 @@ public class StartingScene extends Scene {
 
 			if(item is ScissorsPiece1) {
 				// TODO: trocar fonte por uma com suporte unicode
-				DialogBox.show(this, new Sherlock(), "Não fique pegando lixo, Epson!");
+				DialogBox.show(this, sherlock, "Não fique pegando lixo, Epson!");
 				Inventory.show();
 			}
 
