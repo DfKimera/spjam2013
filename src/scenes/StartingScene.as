@@ -9,8 +9,9 @@ package scenes {
 	import engine.Scene;
 
 	import items.ScissorsPiece1;
+import items.ScissorsPiece2;
 
-	public class StartingScene extends Scene {
+public class StartingScene extends Scene {
 
 		[Embed(source="../../assets/scene_start.png")]
 		public var BACKGROUND:Class;
@@ -34,6 +35,7 @@ package scenes {
 
 			Prop.placeOnScene(this, new Sherlock(), 340, 275);
 			Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
+			Item.placeOnScene(this, new ScissorsPiece2(), 500, 335);
 
 			super.create();
 

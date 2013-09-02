@@ -65,6 +65,7 @@ package engine {
 
 		private function redrawGrid():void {
 			$items.clear();
+			currentItem = 0;
 			this.generateGrid();
 		}
 
@@ -92,6 +93,7 @@ package engine {
 
 			if(Inventory.isHoldingItem()) {
 				item._onCombine( Inventory.getHeldItem() );
+				return;
 			}
 
 			trace("Picked item from grid: ", item);

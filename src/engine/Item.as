@@ -67,6 +67,8 @@ package engine {
 		public function consume():void {
 			trace("Item consumed: ", this);
 
+			Inventory.releaseItemOnCursor();
+
 			this.onConsume();
 			Inventory.removeFromInventory(this);
 
@@ -89,6 +91,10 @@ package engine {
 		 */
 		public function _onPick(spr:FlxExtendedSprite, x:int, y:int):void {
 
+			if(Inventory.isHoldingItem()) {
+				return;
+			}
+
 			trace("Item added to inventory: ",this);
 
 			Inventory.addToInventory(this);
@@ -110,8 +116,10 @@ package engine {
 		 */
 		public function _onCombine(item:Item):void {
 			trace("Combining items: ", this, item);
+			Inventory.releaseItemOnCursor();
 			this.onCombine(item);
 			(FlxG.state as Scene).onItemCombine(this, item);
+			Inventory.redrawGrid();
 		}
 
 		// -------------------------------------------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 package items {
 
-	import engine.Item;
+import engine.Inventory;
+import engine.Item;
 
 	public class ScissorsPiece1 extends Item {
 
@@ -19,7 +20,14 @@ package items {
 		}
 
 		override public function onCombine(item:Item):void {
+			if(item is ScissorsPiece2) {
+				var scissors:Scissors = new Scissors();
 
+				item.consume();
+				this.consume();
+
+				Inventory.addToInventory(scissors);
+			}
 		}
 
 		override public function onConsume():void {
