@@ -45,6 +45,10 @@ package engine {
 		public override function update():void {
 			super.update();
 
+			this.updateCursor();
+		}
+
+		public function updateCursor():void {
 			if(this.mouseOver) {
 				if(Inventory.isHoldingItem()) {
 					Cursor.useHand();
