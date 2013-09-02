@@ -1,18 +1,30 @@
 package engine {
+	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Portal extends Prop {
 
-		public function Portal(name:String, width:int, height:int) {
+		private var nextScene:Class;
+
+		public function Portal(name:String, width:int, height:int, nextScene:Class = null) {
 			super();
 			this.name = name;
 			this.width = width;
 			this.height = height;
+			this.nextScene = nextScene;
 		}
 
 		override public function draw():void { /* Prevent drawing */ }
 
 		override public function toString():String {
 			return "Portal(" + name + " @" + x + "," + y + " sz=" + width + "x" + height + ")";
+		}
+
+		override public function updateCursor():void {
+			if(nextScene is Class) {
+				Cursor.useDoor();
+			} else {
+				Cursor.useEye();
+			}
 		}
 
 		public static function checkIfIs(prop:Prop, name:String):Boolean {
@@ -23,6 +35,15 @@ package engine {
 			}
 
 			return false;
+		}
+
+		override protected function _onInteract(spr:FlxExtendedSprite, x:int, y:int):void {
+			super._onInteract(spr, x, y);
+
+			if(this.nextScene is Class) {
+				Inventory.releaseItemOnCursor();
+				Game.transitionToScene(new this.nextScene());
+			}
 		}
 
 	}
