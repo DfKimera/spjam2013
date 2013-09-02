@@ -45,16 +45,16 @@ package engine {
 		public override function update():void {
 			super.update();
 
-			this.updateCursor();
+			if(this.mouseOver) {
+				this.updateCursor();
+			}
 		}
 
 		public function updateCursor():void {
-			if(this.mouseOver) {
-				if(Inventory.isHoldingItem()) {
-					Cursor.useHand();
-				} else {
-					Cursor.useEye();
-				}
+			if(Inventory.isHoldingItem()) {
+				Cursor.useHand();
+			} else {
+				Cursor.useEye();
 			}
 		}
 

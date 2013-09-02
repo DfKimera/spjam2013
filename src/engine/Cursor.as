@@ -3,27 +3,36 @@ package engine {
 
 	public class Cursor {
 
-		[Embed(source="../../assets/cursor_arrow.png")]
+		[Embed(source="../../assets/cursor_arrow_bk.png")]
 		public static var SPRITE_ARROW:Class;
 
-		[Embed(source="../../assets/cursor_hand.png")]
+		[Embed(source="../../assets/cursor_hand_bk.png")]
 		public static var SPRITE_HAND:Class;
 
-		[Embed(source="../../assets/cursor_eye.png")]
+		[Embed(source="../../assets/cursor_eye_bk.png")]
 		public static var SPRITE_EYE:Class;
+
+		[Embed(source="../../assets/cursor_door_bk.png")]
+		public static var SPRITE_DOOR:Class;
 
 		public static var isVisible:Boolean = true;
 
 		public static var shouldUseHand:Boolean = false;
+		public static var shouldUseDoor:Boolean = false;
 		public static var shouldUseEye:Boolean = false;
 
 		public static function useArrow():void {
-			shouldUseEye = false;
 			shouldUseHand = false;
+			shouldUseDoor = false;
+			shouldUseEye = false;
 		}
 
 		public static function useHand():void {
 			shouldUseHand = true;
+		}
+
+		public static function useDoor():void {
+			shouldUseDoor = true;
 		}
 
 		public static function useEye():void {
@@ -45,9 +54,11 @@ package engine {
 		public static function update():void {
 
 			if(Cursor.isVisible) {
-				if(shouldUseHand && !Inventory.isOpen()) {
+				if(shouldUseHand && !Inventory.isMouseOver()) {
 					FlxG.mouse.show(SPRITE_HAND);
-				} else if(shouldUseEye && !Inventory.isOpen()) {
+				} else if(shouldUseDoor && !Inventory.isMouseOver()) {
+					FlxG.mouse.show(SPRITE_DOOR);
+				} else if(shouldUseEye && !Inventory.isMouseOver()) {
 					FlxG.mouse.show(SPRITE_EYE);
 				} else {
 					FlxG.mouse.show(SPRITE_ARROW);
