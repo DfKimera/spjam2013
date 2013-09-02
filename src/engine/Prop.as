@@ -9,7 +9,7 @@ package engine {
 			this.mouseReleasedCallback = this._onInteract;
 		}
 
-		private function _onInteract(spr:FlxExtendedSprite, x:int, y:int):void {
+		protected function _onInteract(spr:FlxExtendedSprite, x:int, y:int):void {
 			trace("Prop interaction: ", this, spr, x, y);
 
 			if(FlxG.state is Scene) {
@@ -30,7 +30,7 @@ package engine {
 
 		}
 
-		private function _onItemUse(item:Item):void {
+		protected function _onItemUse(item:Item):void {
 
 			trace("Used item on prop", this, item);
 
