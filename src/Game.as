@@ -1,5 +1,6 @@
 package {
 	import engine.Cursor;
+	import engine.Dialog;
 	import engine.Scene;
 
 	import org.flixel.FlxG;
@@ -67,9 +68,9 @@ package {
 		 */
 		public static function transitionToScene(scene:FlxState, delay:Number = Config.SCENE_FADE_DELAY):void {
 			trace("------------------ END SCENE ---------------------");
+			Dialog.clearAll();
 			FlxG.fade(0xff000000, delay, function ():void {
 				FlxG.switchState(scene);
-
 			});
 		}
 

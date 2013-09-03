@@ -14,6 +14,7 @@ package scenes {
 	import items.RustyKnife;
 
 	import items.Scissors;
+	import items.ScissorsPiece2;
 
 	import props.Bush;
 	import props.Rock;
@@ -24,6 +25,8 @@ package scenes {
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock = new Sherlock();
+
+		public static var visited:Boolean = false;
 
 		public override function prepare():void {
 			setBackground(BACKGROUND);
@@ -36,15 +39,25 @@ package scenes {
 
 			sherlock = new Sherlock();
 
-			Dialog.show(this, sherlock, "As pegadas parecem levar até essa clareira", "default", "bottom");
-
-			Inventory.addToInventory(new Scissors());
-			Inventory.addToInventory(new RustyKnife());
+			if(!visited) {
+				Dialog.show(this, sherlock, "As pegadas parecem levar até essa clareira", "default", "bottom");
+			}
 
 			Portal.placeOnScene(this, "to_c1", 65, 10, 200, 300, ForestC1);
 
 			Prop.placeOnScene(this, new Rock(), 155, 325);
-			Prop.placeOnScene(this, new Bush(), 60, 0);
+
+			if(!ForestC1.visited) {
+				Prop.placeOnScene(this, new Bush(), 60, 0);
+			}
+
+			if(!Inventory.hasItemOfType("items::Scissors")) {
+				Item.placeOnScene(this, new ScissorsPiece2(), 530, 400);
+			}
+
+			Portal.placeOnScene(this, "to_start", 700, 0, 100, 600, StartingScene);
+
+			visited = true;
 
 		}
 
@@ -55,7 +68,7 @@ package scenes {
 			}
 
 			if(prop is Rock) {
-				Dialog.show(this, sherlock, "Puxa, mas que pedra mais afiada!", "default", "bottom");
+				Dialog.show(this, sherlock, "Pronto, afiadíssima!", "default", "bottom");
 			}
 		}
 
@@ -79,7 +92,9 @@ package scenes {
 		}
 
 		override public function onItemPick(item:Item):void {
-
+			if(item is ScissorsPiece2) {
+				Dialog.show(this, sherlock, "O que fazer com MEIA tesoura!?");
+			}
 		}
 
 		override public function onItemCombine(item1:Item,item2:Item):void {

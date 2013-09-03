@@ -7,7 +7,7 @@ package items {
 		[Embed(source="../../assets/item_dryleaves.png")]
 		public var ICON_SPRITE:Class;
 
-		[Embed(source="../../assets/item_dryleaves.png")]
+		[Embed(source="../../assets/item_dryleaves_placed.png")]
 		public var PLACED_SPRITE:Class;
 
 		public function DryLeaves() {

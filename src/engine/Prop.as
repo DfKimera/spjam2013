@@ -34,6 +34,7 @@ package engine {
 
 			trace("Used item on prop", this, item);
 
+			item._onUse();
 			this.onItemUse(item);
 
 			if(FlxG.state is Scene) {

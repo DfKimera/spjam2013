@@ -19,6 +19,7 @@ package scenes {
 
 		public var sherlock:Sherlock;
 
+		public static var visited:Boolean = false;
 
 		public override function prepare():void {
 			setBackground(BACKGROUND);
@@ -31,8 +32,10 @@ package scenes {
 
 			sherlock = new Sherlock();
 
-			Dialog.show(this, sherlock, "Veja Watson! Pegadas!");
-			Dialog.show(this, sherlock, "Qual caminho devemos seguir?");
+			if(!visited) {
+				Dialog.show(this, sherlock, "Veja Watson! Pegadas!");
+				Dialog.show(this, sherlock, "Qual caminho devemos seguir?");
+			}
 
 			Portal.placeOnScene(this, "to_p1", 0, 80, 120, 400, ForestP1);
 			Portal.placeOnScene(this, "to_p2", 680, 80, 120, 400, ForestP2);
@@ -40,7 +43,11 @@ package scenes {
 			Prop.placeOnScene(this, sherlock, 540, 225);
 			Portal.placeOnScene(this, "footsteps", 350, 400, 270, 200);
 
-			Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
+			if(!Inventory.hasItemOfType("items::Scissors")) {
+				Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
+			}
+
+			visited = true;
 
 		}
 

@@ -847,6 +847,7 @@ package org.flixel
 			if(Camera == null)
 				Camera = FlxG.camera;
 			getScreenXY(_point,Camera);
+
 			_point.x = _point.x - offset.x;
 			_point.y = _point.y - offset.y;
 

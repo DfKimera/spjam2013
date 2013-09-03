@@ -19,6 +19,7 @@ package engine {
 		public var selectedItemIcon:FlxExtendedSprite;
 
 		private var fadeInDelay:Number = Config.SCENE_FADE_DELAY;
+		protected var isReady:Boolean = false;
 
 		public function Scene():void {
 			trace("Preparing scene...");
@@ -55,11 +56,15 @@ package engine {
 
 			trace("Done, displaying...");
 
-			FlxG.flash(0xff000000, this.fadeInDelay);
+			var scene:Scene = this;
 
 			if(hasInventoryEnabled()) {
 				inventory = new Inventory(this);
 			}
+
+			FlxG.flash(0xff000000, this.fadeInDelay, function():void {
+				isReady = true;
+			});
 		}
 
 		protected function hasInventoryEnabled():Boolean {
@@ -71,6 +76,12 @@ package engine {
 		 * If overridden, don't forget to call super.update();.
 		 */
 		public override function update():void {
+			super.update();
+
+			if(!isReady) {
+				return;
+			}
+
 			if(FlxG.keys.justPressed("I")) {
 				if(!Inventory.isOpen()) {
 					Inventory.show();
@@ -78,8 +89,6 @@ package engine {
 					Inventory.hide();
 				}
 			}
-
-			super.update();
 
 			if(Inventory.isHoldingItem()) {
 				selectedItemIcon.x = FlxG.mouse.x + 2;

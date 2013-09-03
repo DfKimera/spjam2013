@@ -46,6 +46,7 @@ package {
 		}
 
 		public function triggerOption(name:String):void {
+			if(!options[name]) { return; }
 			trace("Menu (trigger): ", name, options[name]);
 			(options[name] as MenuOption).trigger();
 		}

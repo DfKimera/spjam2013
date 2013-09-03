@@ -40,6 +40,8 @@ package engine {
 			button.mouseReleasedCallback = this.onButtonClick;
 			scene.ui.add(button);
 
+			button.ID = int.MAX_VALUE;
+
 			this.scene = scene;
 
 			trace("Inventory registered on scene: ", scene);
@@ -68,7 +70,7 @@ package engine {
 
 		private function placeItemOnGrid(item:Item):void {
 
-			var icon:FlxExtendedSprite = item.icon;
+			var icon:FlxExtendedSprite = item.getIcon();
 			icon.name = getQualifiedClassName(item);
 			icon.mouseReleasedCallback = this.onGridIconPick;
 
@@ -181,6 +183,7 @@ package engine {
 		 */
 		public static function show():void {
 			if(Inventory.invGrid is Inventory) {
+				Inventory.invGrid.redrawGrid();
 				Inventory.invGrid.show();
 			}
 		}

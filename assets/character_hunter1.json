@@ -1,0 +1,28 @@
+{"frames": {
+
+"character_hunter_hanging.png":
+{
+	"frame": {"x":0,"y":0,"w":161,"h":516},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":161,"h":516},
+	"sourceSize": {"w":161,"h":516}
+},
+"character_hunter_sitting.png":
+{
+	"frame": {"x":161,"y":0,"w":161,"h":516},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":161,"h":516},
+	"sourceSize": {"w":161,"h":516}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "character_hunter.png",
+	"format": "RGBA8888",
+	"size": {"w":322,"h":516},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a98f6d38685eb2cb9d2b51404ed2336b$"
+}
+}

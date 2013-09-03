@@ -192,6 +192,21 @@ package engine {
 			return (Dialog.dialogQueue.length > 0) || (openDialog is Dialog);
 		}
 
+		/**
+		 * Clears the dialog box queue
+		 */
+		public static function clearAll():void {
+			if(openDialog is Dialog) {
+				openDialog.kill();
+				openDialog.destroy();
+			}
+
+			openDialog = null;
+			Dialog.dialogQueue = new Vector.<Dialog>();
+
+			trace("Dialog: cleared all dialog boxes from queue");
+		}
+
 
 	}
 }

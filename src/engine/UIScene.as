@@ -5,6 +5,7 @@ package engine {
 	public class UIScene extends Scene {
 
 		public override function update():void {
+			if(!isReady) { return; }
 			if(FlxG.keys.justPressed("ESCAPE")) {
 				Game.goToMainMenu();
 			}

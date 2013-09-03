@@ -11,7 +11,7 @@ package engine {
 		private var graphicIcon:Class;
 		private var graphicPlaced:Class;
 
-		public var icon:FlxExtendedSprite;
+		protected var icon:FlxExtendedSprite;
 		public var placed:FlxExtendedSprite;
 
 		public function Item(graphicIcon:Class, graphicPlaced:Class) {
@@ -39,6 +39,18 @@ package engine {
 			var icon:FlxExtendedSprite = new FlxExtendedSprite(0,0);
 			icon.loadGraphic(graphicIcon, false, false, 80, 80);
 			icon.name = getQualifiedClassName(this);
+			return icon;
+		}
+
+		/**
+		 * Gets the item's grid icon
+		 * @return FlxExtendedSprite
+		 */
+		public function getIcon():FlxExtendedSprite {
+			if(!icon.offset) {
+				icon = generateIcon();
+			}
+
 			return icon;
 		}
 
@@ -80,6 +92,7 @@ package engine {
 
 			this.kill();
 			this.destroy();
+
 		}
 
 		/**
@@ -120,6 +133,14 @@ package engine {
 			this.onCombine(item);
 			(FlxG.state as Scene).onItemCombine(this, item);
 			Inventory.redrawGrid();
+		}
+
+		/**
+		 * @internal
+		 * Internal handler for item use.
+		 */
+		public function _onUse():void {
+			Inventory.hide();
 		}
 
 		// -------------------------------------------------------------------------------------------------------------
