@@ -39,7 +39,7 @@ package engine {
 		 */
 		public override function create():void {
 
-			trace("Creating scene...");
+			trace("Creating scene: ", this);
 
 			this.game = Game.instance;
 
@@ -103,7 +103,6 @@ package engine {
 		 * Releases whichever item is on the player's cursor.
 		 */
 		public function releaseItemOnCursor():void {
-			trace("Released item on cursor");
 
 			if(selectedItemIcon is FlxExtendedSprite) {
 				remove(selectedItemIcon);

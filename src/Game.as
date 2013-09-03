@@ -66,6 +66,7 @@ package {
 		 * @param delay Number The transition delay, in seconds.
 		 */
 		public static function transitionToScene(scene:FlxState, delay:Number = Config.SCENE_FADE_DELAY):void {
+			trace("------------------ END SCENE ---------------------");
 			FlxG.fade(0xff000000, delay, function ():void {
 				FlxG.switchState(scene);
 
