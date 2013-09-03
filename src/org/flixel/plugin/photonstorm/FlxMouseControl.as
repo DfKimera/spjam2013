@@ -30,7 +30,7 @@ package org.flixel.plugin.photonstorm
 		/**
 		 * The value that the FlxExtendedSprites are sorted by before deciding which is "on-top" for click select
 		 */
-		public static var sortIndex:String = "y";
+		public static var sortIndex:String = "ID";
 		
 		/**
 		 * The sorting order. If the sortIndex is "y" and the order is ASCENDING then a sprite with a Y value of 200 would be "on-top" of one with a Y value of 100.
@@ -197,6 +197,14 @@ package org.flixel.plugin.photonstorm
 			{
 				clickStack.sort(sortHandler);
 			}
+
+			var clickStackDebug:Array = [];
+
+			for each (var i:FlxExtendedSprite in clickStack) {
+				clickStackDebug.push("<"+i+">("+i.ID+")");
+			}
+
+			trace("Mouse handler sequence (last is picked): [", clickStackDebug, "]");
 			
 			clickTarget = clickStack.pop();
 			

@@ -46,13 +46,15 @@ package org.flixel
 		 * when the visual debug mode in the debugger overlay is toggled on.
 		 */
 		public var ignoreDrawDebug:Boolean;
-		
+
+		public static var index:int = 0;
+
 		/**
 		 * Instantiate the basic flixel object.
 		 */
 		public function FlxBasic()
 		{
-			ID = -1;
+			ID = ++FlxBasic.index;
 			exists = true;
 			active = true;
 			visible = true;

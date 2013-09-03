@@ -9,6 +9,7 @@ package org.flixel
 	 */
 	public class FlxGroup extends FlxBasic
 	{
+
 		/**
 		 * Use with <code>sort()</code> to sort in ascending order.
 		 */
@@ -207,6 +208,9 @@ package org.flixel
 			//and we can go ahead and add the object at the first open slot.
 			members[i] = Object;
 			length = i+1;
+
+			Object.ID = ++FlxBasic.index;
+
 			return Object;
 		}
 		
