@@ -41,7 +41,7 @@ package scenes {
 			Portal.placeOnScene(this, "to_p2", 680, 80, 120, 400, ForestP2);
 
 			Prop.placeOnScene(this, sherlock, 540, 225);
-			Portal.placeOnScene(this, "footsteps", 350, 400, 270, 200);
+			Portal.placeOnScene(this, "footsteps", 250, 400, 270, 200);
 
 			if(!Inventory.hasItemOfType("items::Scissors")) {
 				Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
