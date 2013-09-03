@@ -4,6 +4,7 @@ package scenes {
 	import characters.Sherlock;
 
 	import engine.Dialog;
+	import engine.Inventory;
 
 	import engine.Item;
 	import engine.Portal;
@@ -56,8 +57,14 @@ package scenes {
 
 			Prop.placeOnScene(this, cushion, 370, 470);
 			Prop.placeOnScene(this, hunter, 370, 0);
-			Item.placeOnScene(this, new DryLeaves(), 210, 470);
-			Item.placeOnScene(this, new RustyKnife(), 520, 440);
+
+			if(!Inventory.hasItemOfType("items::DryLeaves")) {
+				Item.placeOnScene(this, new DryLeaves(), 210, 470);
+			}
+
+			if(!Inventory.hasItemOfType("items::Knife") && !Inventory.hasItemOfType("item::RustyKnife")) {
+				Item.placeOnScene(this, new RustyKnife(), 520, 440);
+			}
 
 			Portal.placeOnScene(this, "to_p1", 0, 540, 800, 60, ForestP1);
 
@@ -103,7 +110,7 @@ package scenes {
 			if(prop is Hunter1 && item is Knife) {
 
 				if(!cushionIsPlaced) {
-					Dialog.show(this, sherlock, "Espere! Precisamos de algo para amortecer a queda!");
+					Dialog.show(this, sherlock, "Espere! Precisamos de algo para amortecer a queda! Veja se encontra algo por aí!");
 					return;
 				}
 
