@@ -2,9 +2,23 @@ package scenes {
 
 	import characters.Sherlock;
 
+	import engine.Dialog;
+	import engine.Inventory;
+
 	import engine.Item;
+	import engine.Portal;
 	import engine.Prop;
 	import engine.Scene;
+
+	import items.Knife;
+	import items.Liana;
+	import items.Plank;
+	import items.RustyKnife;
+
+	import props.Boulder;
+	import props.BoulderWithPlank;
+
+	import props.LianaPlaced;
 
 	public class ForestP2 extends Scene {
 
@@ -13,6 +27,9 @@ package scenes {
 
 		public var sherlock:Sherlock = new Sherlock();
 
+		public static var visited:Boolean = false;
+		public static var plankPlaced:Boolean = false;
+
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
@@ -20,30 +37,75 @@ package scenes {
 
 		public override function create():void {
 
+			super.create();
+
 			sherlock = new Sherlock();
 
-			super.create();
+			Prop.placeOnScene(this, new LianaPlaced(), 490, 0);
+
+			Portal.placeOnScene(this, "Clareira", 630, 120, 170, 270, ForestC2);
+			Portal.placeOnScene(this, "Floresta", 0, 0, 150, 600, StartingScene);
+
+			if(!plankPlaced) {
+				Prop.placeOnScene(this, new Boulder(), 430, 280);
+			} else {
+				Prop.placeOnScene(this, new BoulderWithPlank(), 430, 280);
+			}
+
+			visited = true;
 
 		}
 
 		override public function onPropInteract(prop:Prop):void {
+			if(prop is LianaPlaced) {
+				if(!plankPlaced) {
+					Dialog.show(this, sherlock, "Droga! Não consigo alcançar!", "default", "bottom");
+				} else {
+					Dialog.show(this, sherlock, "O que você está fazendo, Epson? Pretende arrancar o cipó com as mãos!?", "default", "bottom");
+				}
+				return;
+			}
 
+			if(prop is Boulder) {
+				Dialog.show(this, sherlock, "A pedra é irregular e escorregadia demais! Talvez se eu tivesse alguma apoio...");
+				return;
+			}
+
+			if(prop is BoulderWithPlank) {
+				Dialog.show(this, sherlock, "Não é um apoio muito firme, mas ajuda...");
+			}
 		}
 
 		override public function onItemUse(prop:Prop,item:Item):void {
+			if(prop is LianaPlaced && item is Knife) {
+				if(!plankPlaced) {
+					Dialog.show(this, sherlock, "Droga! Não consigo alcançar!", "default", "bottom");
+					return;
+				}
 
+				prop.remove();
+				Inventory.addToInventory(new Liana());
+				Dialog.show(this, sherlock, "Cipós são bem fortes e dão excelentes cordas!");
+
+				return;
+			}
+
+			if(prop is LianaPlaced && item is RustyKnife) {
+				Dialog.show(this, sherlock, "Gah! A faca está cega! Se tivessemos algum lugar para afiá-la...");
+				return;
+			}
+
+			if(prop is Boulder && item is Plank) {
+				prop.remove();
+				item.consume();
+
+				Prop.placeOnScene(this, new BoulderWithPlank(), 430, 280);
+
+				plankPlaced = true;
+
+				Dialog.show(this, sherlock, "Boa sacada, Epson! Agora suba lá e pegue esse cipó!");
+			}
 		}
 
-		override public function onItemPick(item:Item):void {
-
-		}
-
-		override public function onItemCombine(item1:Item,item2:Item):void {
-
-		}
-
-		override public function onBackgroundClick(x:int,y:int):void {
-
-		}
 	}
 }

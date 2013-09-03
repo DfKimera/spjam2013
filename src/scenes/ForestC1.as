@@ -30,11 +30,12 @@ package scenes {
 
 		public var cushion:DryLeavesCushion;
 
-		public var hunterIsReleased:Boolean = false;
-		public var cushionIsPlaced:Boolean = false;
+		public static var hunterIsReleased:Boolean = false;
+		public static var cushionIsPlaced:Boolean = false;
 		public var portalCreated:Boolean = false;
 
 		public static var visited:Boolean = false;
+		public static var cleared:Boolean = false;
 
 		public override function prepare():void {
 			setBackground(BACKGROUND);
@@ -49,8 +50,6 @@ package scenes {
 			cushion = new DryLeavesCushion();
 			hunter = new Hunter1();
 
-			cushion.visible = false;
-
 			if(!visited) {
 				Dialog.show(this, sherlock, "Mexa esse traseiro gordo, Epson! Salve o nobre rapaz!", "default", "bottom");
 			}
@@ -58,15 +57,29 @@ package scenes {
 			Prop.placeOnScene(this, cushion, 370, 470);
 			Prop.placeOnScene(this, hunter, 370, 0);
 
-			if(!Inventory.hasItemOfType("items::DryLeaves")) {
-				Item.placeOnScene(this, new DryLeaves(), 210, 470);
+			if(!cleared) {
+
+				if(!cushionIsPlaced) {
+					cushion.visible = false;
+				}
+
+				if(!Inventory.hasItemOfType("items::DryLeaves")) {
+					Item.placeOnScene(this, new DryLeaves(), 210, 470);
+				}
+
+				if(!Inventory.hasItemOfType("items::Knife") && !Inventory.hasItemOfType("item::RustyKnife")) {
+					Item.placeOnScene(this, new RustyKnife(), 520, 440);
+				}
+
+			} else {
+				hunterIsReleased = true;
+				cushionIsPlaced = true;
+				portalCreated = true;
+				hunter.play("sitting");
+				Portal.placeOnScene(this, "Vilarejo", 250, 0, 330, 380, VillageScene);
 			}
 
-			if(!Inventory.hasItemOfType("items::Knife") && !Inventory.hasItemOfType("item::RustyKnife")) {
-				Item.placeOnScene(this, new RustyKnife(), 520, 440);
-			}
-
-			Portal.placeOnScene(this, "to_p1", 0, 540, 800, 60, ForestP1);
+			Portal.placeOnScene(this, "Floresta", 0, 540, 800, 60, ForestP1);
 
 			visited = true;
 
@@ -83,6 +96,7 @@ package scenes {
 
 					if(!portalCreated) {
 						portalCreated = true;
+						cleared = true;
 						Portal.placeOnScene(this, "to_village", 250, 0, 330, 380, VillageScene);
 					}
 				}

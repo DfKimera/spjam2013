@@ -37,11 +37,11 @@ package scenes {
 				Dialog.show(this, sherlock, "Qual caminho devemos seguir?");
 			}
 
-			Portal.placeOnScene(this, "to_p1", 0, 80, 120, 400, ForestP1);
-			Portal.placeOnScene(this, "to_p2", 680, 80, 120, 400, ForestP2);
+			Portal.placeOnScene(this, "Floresta", 0, 80, 120, 400, ForestP1);
+			Portal.placeOnScene(this, "Floresta", 680, 80, 120, 400, ForestP2);
 
 			Prop.placeOnScene(this, sherlock, 540, 225);
-			Portal.placeOnScene(this, "footsteps", 250, 400, 270, 200);
+			Portal.placeOnScene(this, "Pegadas", 250, 400, 270, 200);
 
 			if(!Inventory.hasItemOfType("items::Scissors")) {
 				Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
@@ -52,7 +52,7 @@ package scenes {
 		}
 
 		override public function onPropInteract(prop:Prop):void {
-			if(Portal.checkIfIs(prop, "footsteps")) {
+			if(Portal.checkIfIs(prop, "Pegadas")) {
 				Dialog.show(this, sherlock, "Alguem não fez questão de esconder os rastros");
 			}
 		}

@@ -43,7 +43,7 @@ package scenes {
 				Dialog.show(this, sherlock, "As pegadas parecem levar até essa clareira", "default", "bottom");
 			}
 
-			Portal.placeOnScene(this, "to_c1", 65, 10, 200, 300, ForestC1);
+			Portal.placeOnScene(this, "Clareira", 65, 10, 200, 300, ForestC1);
 
 			Prop.placeOnScene(this, new Rock(), 155, 325);
 
@@ -55,7 +55,7 @@ package scenes {
 				Item.placeOnScene(this, new ScissorsPiece2(), 530, 400);
 			}
 
-			Portal.placeOnScene(this, "to_start", 700, 0, 100, 600, StartingScene);
+			Portal.placeOnScene(this, "Floresta", 700, 0, 100, 600, StartingScene);
 
 			visited = true;
 
