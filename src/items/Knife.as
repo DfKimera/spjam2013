@@ -14,16 +14,5 @@ package items {
 			super(ICON_SPRITE, PLACED_SPRITE);
 		}
 
-		override public function onPick():void {
-
-		}
-
-		override public function onCombine(item:Item):void {
-
-		}
-
-		override public function onConsume():void {
-
-		}
 	}
 }

@@ -27,6 +27,8 @@ package scenes {
 
 		public override function create():void {
 
+			super.create();
+
 			sherlock = new Sherlock();
 
 			Dialog.show(this, sherlock, "Veja Watson! Pegadas!");
@@ -39,8 +41,6 @@ package scenes {
 			Portal.placeOnScene(this, "footsteps", 350, 400, 270, 200);
 
 			Item.placeOnScene(this, new ScissorsPiece1(), 100, 535);
-
-			super.create();
 
 		}
 

@@ -1,73 +1,91 @@
 package scenes {
 
+	import characters.Sherlock;
+
+	import engine.Dialog;
+	import engine.Inventory;
+
 	import engine.Item;
+	import engine.Portal;
 	import engine.Prop;
 	import engine.Scene;
+
+	import items.Knife;
+	import items.RustyKnife;
+
+	import items.Scissors;
+
+	import props.Bush;
+	import props.Rock;
 
 	public class ForestP1 extends Scene {
 
 		[Embed(source="../../assets/scene_p1.png")]
 		public var BACKGROUND:Class;
 
-		/**
-		 * Called before the scene is created; should be used to set background and fade delays.
-		 */
+		public var sherlock:Sherlock = new Sherlock();
+
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
 		}
 
-		/**
-		 * Called when the scene is created.
-		 * If overridden, don't forget to call super.create();.
-		 */
 		public override function create():void {
-
-
 
 			super.create();
 
+			sherlock = new Sherlock();
+
+			Dialog.show(this, sherlock, "As pegadas parecem levar até essa clareira", "default", "bottom");
+
+			Inventory.addToInventory(new Scissors());
+			Inventory.addToInventory(new RustyKnife());
+
+			Portal.placeOnScene(this, "to_c1", 65, 10, 200, 300, ForestC1);
+
+			Prop.placeOnScene(this, new Rock(), 155, 325);
+			Prop.placeOnScene(this, new Bush(), 60, 0);
+
 		}
 
-		/**
-		 * Called when the player interacts with a prop.
-		 * @param prop Prop The interacted prop.
-		 */
 		override public function onPropInteract(prop:Prop):void {
+			if(prop is Bush) {
+				Dialog.show(this, sherlock, "Precisamos de algo para liberar o caminho... Hmm...", "default", "bottom");
+				return;
+			}
 
+			if(prop is Rock) {
+				Dialog.show(this, sherlock, "Puxa, mas que pedra mais afiada!", "default", "bottom");
+			}
 		}
 
-		/**
-		 * Called when the player uses an item on a prop.
-		 * @param prop Prop The prop triggered.
-		 * @param item Item The item used.
-		 */
 		override public function onItemUse(prop:Prop,item:Item):void {
+			if(prop is Bush && item is Scissors) {
+				Dialog.show(this, sherlock, "Elementar, meu caro Epson!");
+				prop.remove();
+				return;
+			}
 
+			if(prop is Rock && item is RustyKnife) {
+				Dialog.show(this, sherlock, "Ahh! Essa é uma pedra de afiar!", "default", "bottom");
+				item.consume();
+				Inventory.addToInventory(new Knife());
+				return;
+			}
+
+			if(prop is Rock && item is Knife) {
+				Dialog.show(this, sherlock, "A faca já está bem afiada!", "default", "bottom");
+			}
 		}
 
-		/**
-		 * Called when the player picks an item.
-		 * @param item Item The picked item.
-		 */
 		override public function onItemPick(item:Item):void {
 
 		}
 
-		/**
-		 * Called when two items are combined together
-		 * @param item1 Item The first item (target).
-		 * @param item2 Item The second item (origin).
-		 */
 		override public function onItemCombine(item1:Item,item2:Item):void {
 
 		}
 
-		/**
-		 * Called when a player clicks on the background (not on any prop/item).
-		 * @param x int The X position.
-		 * @param y int The Y position.
-		 */
 		override public function onBackgroundClick(x:int,y:int):void {
 
 		}
