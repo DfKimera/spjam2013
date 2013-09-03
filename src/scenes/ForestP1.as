@@ -68,7 +68,7 @@ package scenes {
 			}
 
 			if(prop is Rock) {
-				Dialog.show(this, sherlock, "Pronto, afiadíssima!", "default", "bottom");
+				Dialog.show(this, sherlock, "Mas que pedra pontuda... e afiada... hmm...", "default", "bottom");
 			}
 		}
 
@@ -80,7 +80,7 @@ package scenes {
 			}
 
 			if(prop is Rock && item is RustyKnife) {
-				Dialog.show(this, sherlock, "Ahh! Essa é uma pedra de afiar!", "default", "bottom");
+				Dialog.show(this, sherlock, "Brilhante idéia, Epson! A faca ficou afiadíssima!", "default", "bottom");
 				item.consume();
 				Inventory.addToInventory(new Knife());
 				return;
