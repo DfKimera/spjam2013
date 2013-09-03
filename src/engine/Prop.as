@@ -1,6 +1,6 @@
 package engine {
+
 	import org.flixel.FlxG;
-	import org.flixel.FlxSprite;
 	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Prop extends FlxExtendedSprite {
@@ -56,6 +56,19 @@ package engine {
 			} else {
 				Cursor.useEye();
 			}
+		}
+
+		/**
+		 * Removes the prop from the scene
+		 */
+		public function remove():void {
+
+			if(FlxG.state is Scene) {
+				(FlxG.state as Scene).props.remove(this);
+			}
+
+			this.kill();
+			this.destroy();
 		}
 
 		/**
