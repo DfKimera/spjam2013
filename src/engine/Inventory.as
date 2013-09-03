@@ -1,14 +1,9 @@
 package engine {
 
-	import avmplus.getQualifiedClassName;
-
-	import flash.display.Stage;
-
 	import flash.utils.getQualifiedClassName;
 
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
-	import org.flixel.FlxSprite;
 	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Inventory extends FlxGroup {
@@ -30,6 +25,8 @@ package engine {
 
 		public var isOpen:Boolean = false;
 
+		public var position:Array = [235, 370];
+
 		public var itemPositionOffset:Array = [285,437];
 		public var itemMargin:int = 9;
 		public var currentItem:int = 0;
@@ -47,7 +44,7 @@ package engine {
 
 			trace("Inventory registered on scene: ", scene);
 
-			background = new FlxExtendedSprite(0,0);
+			background = new FlxExtendedSprite(position[0],position[1]);
 			background.loadGraphic(BACKGROUND);
 
 			add(background);
@@ -148,8 +145,7 @@ package engine {
 		 */
 		public static function removeFromInventory(item:Item):void {
 			Inventory.items[getQualifiedClassName(item)] = null;
-			invGrid.$items.clear();
-			invGrid.generateGrid();
+			invGrid.redrawGrid();
 		}
 
 		/**
