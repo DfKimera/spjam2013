@@ -7,7 +7,7 @@ package engine {
 	import org.flixel.FlxTimer;
 	import org.flixel.plugin.photonstorm.FlxDelay;
 
-	public class DialogBox extends FlxGroup {
+	public class Dialog extends FlxGroup {
 
 		[Embed(source="../../assets/character_dialog_box.png")]
 		private var BACKGROUND:Class;
@@ -43,7 +43,7 @@ package engine {
 		public var text:FlxText;
 		public var textOffset:Array = [125, 52, 610];
 
-		public function DialogBox(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top") {
+		public function Dialog(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top") {
 
 			trace("Dialog: ", scene, character, message, expression);
 
@@ -91,13 +91,13 @@ package engine {
 				}
 
 				isActive = false;
-				var dialog:DialogBox = this;
+				var dialog:Dialog = this;
 
 				Utils.fadeOutGroup(dialog, Config.DIALOG_FADE_DELAY, function():void {
 					scene.ui.remove(dialog);
 					openDialog = null;
 
-					DialogBox.advanceQueue();
+					Dialog.advanceQueue();
 
 					dialog.kill();
 					dialog.destroy();
@@ -139,8 +139,8 @@ package engine {
 
 		// -------------------------------------------------------------------------------------------------------------
 
-		public static var openDialog:DialogBox = null;
-		public static var dialogQueue:Vector.<DialogBox> = new Vector.<DialogBox>();
+		public static var openDialog:Dialog = null;
+		public static var dialogQueue:Vector.<Dialog> = new Vector.<Dialog>();
 
 		/**
 		 * Shows a dialog box.
@@ -149,22 +149,22 @@ package engine {
 		 * @param message String The dialog message.
 		 * @param expression String The character's portrait expression (as defined on the character).
 		 * @param position String The box position ("top" or "bottom")
-		 * @return DialogBox
+		 * @return Dialog
 		 */
-		public static function show(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top"):DialogBox {
-			var dialog:DialogBox = new DialogBox(scene,  character, message, expression, position);
+		public static function show(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top"):Dialog {
+			var dialog:Dialog = new Dialog(scene,  character, message, expression, position);
 
 			if(openDialog != null) {
 				trace("Added dialog to queue: ", dialog);
 				dialogQueue.push(dialog);
 			} else {
-				DialogBox.showDialog(dialog);
+				Dialog.showDialog(dialog);
 			}
 
 			return dialog;
 		}
 
-		private static function showDialog(dialog:DialogBox):void {
+		private static function showDialog(dialog:Dialog):void {
 			openDialog = dialog;
 
 			dialog.setAll("alpha", 0);
@@ -176,12 +176,20 @@ package engine {
 		private static function advanceQueue():void {
 
 			if(dialogQueue.length > 0) {
-				var dialog:DialogBox = dialogQueue.shift();
+				var dialog:Dialog = dialogQueue.shift();
 				trace("Showing dialog from queue: ", dialog, "("+dialogQueue.length+" left in queue)");
 
-				DialogBox.showDialog(dialog);
+				Dialog.showDialog(dialog);
 			}
 
+		}
+
+		/**
+		 * Checks if there are any pending dialogs waiting to be displayed
+		 * @return Boolean
+		 */
+		public static function isPending():Boolean {
+			return (Dialog.dialogQueue.length > 0) || (openDialog is Dialog);
 		}
 
 
