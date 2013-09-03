@@ -12,8 +12,11 @@ package engine {
 		[Embed(source="../../assets/character_dialog_box.png")]
 		private var BACKGROUND:Class;
 
-		[Embed(source="../../assets/dpcomic.ttf", fontFamily="dpcomic", embedAsCFF="false")]
-		private var FONT:Class;
+		[Embed(source="../../assets/comiczine.otf", fontFamily="comiczine", embedAsCFF="false")]
+		private var TITLE_FONT:Class;
+
+		[Embed(source="../../assets/cartoonisthand.ttf", fontFamily="cartoonisthand", embedAsCFF="false")]
+		private var TEXT_FONT:Class;
 
 		public var isActive:Boolean = true;
 		public var isCompleted:Boolean = false;
@@ -35,7 +38,7 @@ package engine {
 		public var portraitOffset:Array = [10,16];
 
 		public var title:FlxText;
-		public var titleOffset:Array = [125, 22, 610];
+		public var titleOffset:Array = [125, 14, 610];
 
 		public var text:FlxText;
 		public var textOffset:Array = [125, 52, 610];
@@ -64,11 +67,11 @@ package engine {
 			add(portrait);
 
 			title = new FlxText(titleOffset[0], titleOffset[1] + offsetY, titleOffset[2], character.characterName);
-			title.setFormat("dpcomic", 24, 0x9ee03f, "left", 0xFF000000);
+			title.setFormat("comiczine", 32, 0x9ee03f, "left", 0xFF000000);
 			add(title);
 
 			text = new FlxText(textOffset[0], textOffset[1] + offsetY, textOffset[2], "");
-			text.setFormat("dpcomic", 18, 0xFFFFFF, "left", 0xFF000000);
+			text.setFormat("cartoonisthand", 20, 0xFFFFFF, "left", 0xFF000000);
 			add(text);
 
 
