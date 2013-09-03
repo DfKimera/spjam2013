@@ -196,7 +196,10 @@ package engine {
 		 * Clears the dialog box queue
 		 */
 		public static function clearAll():void {
+
 			if(openDialog is Dialog) {
+				openDialog.fxTimer.stop();
+				openDialog.fxTimer.destroy();
 				openDialog.kill();
 				openDialog.destroy();
 			}
