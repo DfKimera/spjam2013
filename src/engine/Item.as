@@ -138,11 +138,11 @@ package engine {
 				return;
 			}
 
-			trace("Item placed on scene: ", scene, item, x, y);
-
 			item.placed.x = x;
 			item.placed.y = y;
 			scene.items.add(item.placed);
+
+			trace("Item placed: ", scene, item, x, y, item.ID);
 
 		}
 	}

@@ -44,7 +44,7 @@ package engine {
 			this.game = Game.instance;
 
 			if(background != null) {
-				trace("Scene has background: ",background);
+				trace("Scene has background: ",background,background.ID);
 				add(background);
 			}
 

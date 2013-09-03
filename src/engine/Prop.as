@@ -63,12 +63,15 @@ package engine {
 		 */
 		public function remove():void {
 
-			if(FlxG.state is Scene) {
-				(FlxG.state as Scene).props.remove(this);
-			}
+			var prop:Prop = this;
 
-			this.kill();
-			this.destroy();
+			Utils.fadeOut(this, Config.PROP_FADE_DELAY, function ():void {
+				if(FlxG.state is Scene) {
+					(FlxG.state as Scene).props.remove(prop);
+				}
+				prop.kill();
+				prop.destroy();
+			});
 		}
 
 		/**
@@ -101,6 +104,8 @@ package engine {
 			prop.x = x;
 			prop.y = y;
 			scene.props.add(prop);
+
+			trace("Prop placed: ", prop, x, y, prop.ID);
 		}
 
 	}
