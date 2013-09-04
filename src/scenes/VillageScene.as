@@ -41,6 +41,7 @@ package scenes {
 			}
 
 			Portal.placeOnScene(this, "Clareira", 650, 350, 150, 250, ForestC2);
+			Portal.placeOnScene(this, "Árvore", 290, 180, 100, 150, ForestTree);
 
 			// TODO: add gate, openable with key, leads to C3
 
