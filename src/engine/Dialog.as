@@ -83,7 +83,7 @@ package engine {
 		}
 
 		public override function update():void {
-			if(FlxG.keys.justPressed("ENTER") && isActive) {
+			if((FlxG.keys.justPressed("ENTER") || FlxG.mouse.justPressed()) && isActive) {
 
 				if(!isCompleted) {
 					this.completeMessage();
