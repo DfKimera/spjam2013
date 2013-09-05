@@ -79,8 +79,7 @@ package scenes {
 
 		override public function onItemUse(prop:Prop,item:Item):void {
 			if(prop is Hole) {
-				if(item is Liana) {
-					item.consume();
+				if(item is Liana && !cleared) {
 					Prop.placeOnScene(this, hunter, 520, 410);
 					Dialog.show(this, hunter, "PHEW!");
 					Dialog.show(this, sherlock, "Muito bem, Epson!");

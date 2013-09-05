@@ -44,7 +44,12 @@ package scenes {
 			Prop.placeOnScene(this, new LianaPlaced(), 490, 0);
 
 			Portal.placeOnScene(this, "Clareira", 630, 120, 170, 270, ForestC2);
-			Portal.placeOnScene(this, "Floresta", 0, 0, 150, 600, StartingScene);
+
+			if(ForestTree.cleared) {
+				Portal.placeOnScene(this, "Floresta", 0, 0, 150, 600, EndingScene);
+			} else {
+				Portal.placeOnScene(this, "Floresta", 0, 0, 150, 600, StartingScene);
+			}
 
 			if(!plankPlaced) {
 				Prop.placeOnScene(this, new Boulder(), 430, 280);

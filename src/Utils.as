@@ -23,7 +23,9 @@ package {
 
 			return TweenLite.to(target, delay, {alpha: 1,
 				onUpdate: function():void {
-					group.setAll("alpha", target.alpha);
+					if(group.members != null) {
+						group.setAll("alpha", target.alpha);
+					}
 				},
 				onComplete: function():void {
 					if(callback is Function) {
@@ -50,10 +52,12 @@ package {
 
 			return TweenLite.to(target, delay, {alpha: 0,
 				onUpdate: function():void {
-					group.setAll("alpha", target.alpha);
+					if(group.members != null) {
+						group.setAll("alpha", target.alpha);
+					}
 				},
 				onComplete: function():void {
-					if(callback is Function) {
+					if(callback is Function && group.members != null) {
 						callback.call();
 					}
 				}

@@ -1,5 +1,6 @@
 package items {
 
+	import engine.Inventory;
 	import engine.Item;
 
 	public class Liana extends Item {
@@ -12,6 +13,14 @@ package items {
 
 		public function Liana() {
 			super(ICON_SPRITE, PLACED_SPRITE);
+		}
+
+		public override function onCombine(item:Item):void {
+			if(item is Hook) {
+				item.consume();
+				this.consume();
+				Inventory.addToInventory(new RopeHook());
+			}
 		}
 
 	}

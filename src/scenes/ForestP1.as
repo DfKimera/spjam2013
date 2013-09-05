@@ -55,7 +55,11 @@ package scenes {
 				Item.placeOnScene(this, new ScissorsPiece2(), 530, 400);
 			}
 
-			Portal.placeOnScene(this, "Floresta", 700, 0, 100, 600, StartingScene);
+			if(ForestTree.cleared) {
+				Portal.placeOnScene(this, "Floresta", 700, 0, 100, 600, EndingScene);
+			} else {
+				Portal.placeOnScene(this, "Floresta", 700, 0, 100, 600, StartingScene);
+			}
 
 			visited = true;
 

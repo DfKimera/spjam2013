@@ -32,6 +32,8 @@ package engine {
 		public var currentItem:int = 0;
 		public var maxItemsPerRow:int = 5;
 
+		private static var itemIndex:int = 0;
+
 		public function Inventory(scene:Scene) {
 			Inventory.invGrid =  this;
 
@@ -40,7 +42,7 @@ package engine {
 			button.mouseReleasedCallback = this.onButtonClick;
 			scene.ui.add(button);
 
-			button.ID = int.MAX_VALUE;
+			button.ID = int.MAX_VALUE - 1;
 
 			this.scene = scene;
 
@@ -81,6 +83,7 @@ package engine {
 			icon.y = itemPositionOffset[1] + (row * (80 + itemMargin));
 
 			$items.add(icon);
+			icon.ID = 10000 + (++itemIndex);
 
 			currentItem++;
 

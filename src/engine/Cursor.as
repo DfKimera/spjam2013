@@ -3,6 +3,9 @@ package engine {
 
 	public class Cursor {
 
+		[Embed(source="../../assets/cursor_skip.png")]
+		public static var SPRITE_SKIP:Class;
+
 		[Embed(source="../../assets/cursor_arrow_bk.png")]
 		public static var SPRITE_ARROW:Class;
 
@@ -17,14 +20,20 @@ package engine {
 
 		public static var isVisible:Boolean = true;
 
+		public static var shouldUseSkip:Boolean = false;
 		public static var shouldUseHand:Boolean = false;
 		public static var shouldUseDoor:Boolean = false;
 		public static var shouldUseEye:Boolean = false;
 
 		public static function useArrow():void {
+			shouldUseSkip = false;
 			shouldUseHand = false;
 			shouldUseDoor = false;
 			shouldUseEye = false;
+		}
+
+		public static function useSkip():void {
+			shouldUseSkip = true;
 		}
 
 		public static function useHand():void {
@@ -54,7 +63,9 @@ package engine {
 		public static function update():void {
 
 			if(Cursor.isVisible) {
-				if(shouldUseHand && !Inventory.isMouseOver()) {
+				if(shouldUseSkip) {
+					FlxG.mouse.show(SPRITE_SKIP);
+				} else if(shouldUseHand && !Inventory.isMouseOver()) {
 					FlxG.mouse.show(SPRITE_HAND);
 				} else if(shouldUseDoor && !Inventory.isMouseOver()) {
 					FlxG.mouse.show(SPRITE_DOOR);

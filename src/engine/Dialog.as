@@ -6,11 +6,15 @@ package engine {
 	import org.flixel.FlxText;
 	import org.flixel.FlxTimer;
 	import org.flixel.plugin.photonstorm.FlxDelay;
+	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Dialog extends FlxGroup {
 
 		[Embed(source="../../assets/character_dialog_box.png")]
-		private var BACKGROUND:Class;
+		private var BACKGROUND_TOP:Class;
+
+		[Embed(source="../../assets/character_dialog_box_bottom.png")]
+		private var BACKGROUND_BOTTOM:Class;
 
 		[Embed(source="../../assets/comiczine.otf", fontFamily="comiczine", embedAsCFF="false")]
 		private var TITLE_FONT:Class;
@@ -33,7 +37,7 @@ package engine {
 
 		public var offsetY:int = 0;
 
-		public var background:FlxSprite;
+		public var background:FlxExtendedSprite;
 		public var portrait:FlxSprite;
 		public var portraitOffset:Array = [10,16];
 
@@ -58,9 +62,13 @@ package engine {
 			this.expression = expression;
 			this.offsetY = (this.position == "bottom") ? (FlxG.height - 130) : 0;
 
-			background = new FlxSprite(0, offsetY);
-			background.loadGraphic(BACKGROUND, false, false, 800, 130);
+			var sprite:Class = (this.position == "bottom") ? BACKGROUND_BOTTOM : BACKGROUND_TOP;
+
+			background = new FlxExtendedSprite(0, 0);
+			background.loadGraphic(sprite, false, false, 800, 600);
+			background.mouseReleasedCallback = this.skipDialog;
 			add(background);
+			background.ID = int.MAX_VALUE-2;
 
 			portrait = character.getPortrait(expression);
 			//resetPortraitPosition();
@@ -83,29 +91,36 @@ package engine {
 		}
 
 		public override function update():void {
-			if((FlxG.keys.justPressed("ENTER") || FlxG.mouse.justPressed()) && isActive) {
 
-				if(!isCompleted) {
-					this.completeMessage();
-					return;
-				}
+			super.update();
 
-				isActive = false;
-				var dialog:Dialog = this;
-
-				Utils.fadeOutGroup(dialog, Config.DIALOG_FADE_DELAY, function():void {
-					scene.ui.remove(dialog);
-					openDialog = null;
-
-					Dialog.advanceQueue();
-
-					dialog.kill();
-					dialog.destroy();
-				})
-
+			if(background.mouseOver) {
+				Cursor.useSkip();
 			}
 
+			if(FlxG.keys.justPressed("ENTER") && isActive) {
+				this.skipDialog();
+			}
+		}
 
+		public function skipDialog(spr:FlxExtendedSprite = null, x:int = 0, y:int = 0):void {
+			if(!isCompleted) {
+				this.completeMessage();
+				return;
+			}
+
+			isActive = false;
+			var dialog:Dialog = this;
+
+			Utils.fadeOutGroup(dialog, Config.DIALOG_FADE_DELAY, function():void {
+				scene.ui.remove(dialog);
+				openDialog = null;
+
+				Dialog.advanceQueue();
+
+				dialog.kill();
+				dialog.destroy();
+			});
 		}
 
 		private function completeMessage():void {
@@ -133,7 +148,7 @@ package engine {
 
 		private function show():void {
 			resetPortraitPosition();
-			scene.ui.add(this);
+			scene.dialog.add(this);
 			fxTimer.start(Config.DIALOG_CHARACTER_DELAY, 0, this.displayMoreCharacters);
 		}
 

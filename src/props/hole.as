@@ -13,20 +13,5 @@ package props {
 			loadGraphic(SPRITE);
 		}
 
-		/**
-		 * Called when the player interacts with this prop.
-		 */
-		public override function onInteract():void {
-
-		}
-
-		/**
-		 * Called when an item is used on this prop.
-		 * @param item Iten The used item.
-		 */
-		public override function onItemUse(item:Item):void {
-
-		}
-
 	}
 }
