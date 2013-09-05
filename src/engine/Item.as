@@ -152,11 +152,11 @@ package engine {
 		 * @param x int The position of the item on the scene.
 		 * @param y int
 		 */
-		public static function placeOnScene(scene:Scene, item:Item, x:int, y:int):void {
+		public static function placeOnScene(scene:Scene, item:Item, x:int, y:int):Item {
 
 			if(Inventory.hasItem(item)) {
 				trace("Skipping scene placement of item: ", item, "(player already picked)");
-				return;
+				return item;
 			}
 
 			item.placed.x = x;
@@ -164,6 +164,8 @@ package engine {
 			scene.items.add(item.placed);
 
 			trace("Item placed: ", scene, item, x, y, item.ID);
+
+			return item;
 
 		}
 	}

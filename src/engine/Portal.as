@@ -48,8 +48,10 @@ package engine {
 			return false;
 		}
 
-		public static function placeOnScene(scene:Scene, name:String, x:int, y:int, width:int, height:int, nextScene:Class = null):void {
-			Prop.placeOnScene(scene, new Portal(name, width, height, nextScene), x, y);
+		public static function placeOnScene(scene:Scene, name:String, x:int, y:int, width:int, height:int, nextScene:Class = null):Portal {
+			var portal:Portal = new Portal(name, width, height, nextScene);
+			Prop.placeOnScene(scene, portal, x, y);
+			return portal;
 		}
 
 	}

@@ -101,12 +101,13 @@ package engine {
 		 * @param x int The prop position on the scene.
 		 * @param y int
 		 */
-		public static function placeOnScene(scene:Scene, prop:Prop, x:int, y:int):void {
+		public static function placeOnScene(scene:Scene, prop:Prop, x:int, y:int):Prop {
 			prop.x = x;
 			prop.y = y;
 			scene.props.add(prop);
 
 			trace("Prop placed: ", prop, x, y, prop.ID);
+			return prop;
 		}
 
 	}
