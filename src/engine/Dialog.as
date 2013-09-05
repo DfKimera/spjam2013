@@ -47,6 +47,8 @@ package engine {
 		public var text:FlxText;
 		public var textOffset:Array = [125, 52, 610];
 
+		public var onCloseCallback:Function = null;
+
 		public function Dialog(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top") {
 
 			trace("Dialog: ", scene, character, message, expression);
@@ -115,6 +117,10 @@ package engine {
 			Utils.fadeOutGroup(dialog, Config.DIALOG_FADE_DELAY, function():void {
 				scene.ui.remove(dialog);
 				openDialog = null;
+
+				if(dialog.onCloseCallback is Function) {
+					dialog.onCloseCallback.apply();
+				}
 
 				Dialog.advanceQueue();
 
