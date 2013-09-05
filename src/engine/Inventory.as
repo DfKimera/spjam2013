@@ -8,7 +8,7 @@ package engine {
 
 	public class Inventory extends FlxGroup {
 
-		[Embed(source="../../assets/inventory_background.png")]
+		[Embed(source="../../assets/inventory_grid_vertical.png")]
 		public static var BACKGROUND:Class;
 
 		[Embed(source="../../assets/inventory_icon.png")]
@@ -25,12 +25,12 @@ package engine {
 
 		public var isOpen:Boolean = false;
 
-		public var position:Array = [235, 370];
+		public var position:Array = [FlxG.width - 230, FlxG.height - 565];
 
-		public var itemPositionOffset:Array = [285,437];
+		public var itemPositionOffset:Array = [636,87]; //[285,437];
 		public var itemMargin:int = 9;
 		public var currentItem:int = 0;
-		public var maxItemsPerRow:int = 5;
+		public var maxItemsPerRow:int = 1;
 
 		private static var itemIndex:int = 0;
 
