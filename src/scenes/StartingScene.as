@@ -54,11 +54,16 @@ package scenes {
 		override public function onPropInteract(prop:Prop):void {
 			if(Portal.checkIfIs(prop, "Pegadas")) {
 				Dialog.show(this, sherlock, "Alguem não fez questão de esconder os rastros");
+				return;
+			}
+
+			if(prop is Sherlock) {
+				Dialog.show(this, sherlock, "Não fique aí parado, Epson! Me ajude a procurar pistas!");
 			}
 		}
 
 		override public function onItemUse(prop:Prop, item:Item):void {
-
+			Dialog.show(this, sherlock,  "O que você está fazendo, Epson?");
 		}
 
 		override public function onItemPick(item:Item):void {
@@ -69,13 +74,6 @@ package scenes {
 			}
 
 		}
-
-		override public function onItemCombine(item1:Item,item2:Item):void {
-
-		}
-
-		override public function onBackgroundClick(x:int,y:int):void {
-
-		}
+		
 	}
 }

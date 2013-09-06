@@ -11,6 +11,8 @@ package {
 	import org.flixel.plugin.photonstorm.FlxMouseControl;
 
 	import scenes.CreditsScene;
+	import scenes.Epilogue;
+	import scenes.Prologue;
 	import scenes.StartingScene;
 
 	public class Game extends FlxGame {
@@ -64,6 +66,20 @@ package {
 		 */
 		public static function openCredits():void {
 			Game.transitionToScene(new CreditsScene());
+		}
+
+		/**
+		 * Shows the game prologue
+		 */
+		public static function showPrologue():void {
+			Game.transitionToScene(new Prologue());
+		}
+
+		/**
+		 * Shows the game epilogue
+		 */
+		public static function showEpilogue():void {
+			Game.transitionToScene(new Epilogue());
 		}
 
 		/**

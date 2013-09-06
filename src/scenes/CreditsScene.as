@@ -1,5 +1,6 @@
 package scenes {
 
+	import engine.Cursor;
 	import engine.UIScene;
 
 import org.flixel.FlxG;
@@ -13,14 +14,12 @@ public class CreditsScene extends UIScene {
 			setBackground(BACKGROUND_SPRITE);
 		}
 
-		public override function onBackgroundClick(x:int, y:int):void {
-			Game.goToMainMenu();
-		}
-
 		public override function update():void {
 			super.update();
 
-			if(FlxG.keys.any()) {
+			Cursor.useSkip();
+
+			if(FlxG.keys.any() || FlxG.mouse.justPressed()) {
 				Game.goToMainMenu();
 			}
 		}

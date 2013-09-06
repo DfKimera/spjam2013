@@ -92,7 +92,10 @@ package scenes {
 
 			if(prop is Rock && item is Knife) {
 				Dialog.show(this, sherlock, "A faca já está bem afiada!", "default", "bottom");
+				return;
 			}
+
+			Dialog.show(this, sherlock, "O que você está fazendo, Epson?");
 		}
 
 		override public function onItemPick(item:Item):void {

@@ -11,6 +11,8 @@ package scenes {
 	import engine.Prop;
 	import engine.Scene;
 
+	import items.Key1;
+
 	import items.Liana;
 	import items.Plank;
 
@@ -73,7 +75,8 @@ package scenes {
 				Dialog.show(this, hunter, "Phew! Obrigado!!");
 				Dialog.show(this, sherlock, "Pois bem! Me diga, quem foi que te colocou aí?");
 				Dialog.show(this, hunter, "Ele me pegou de costas, não consegui ver...");
-				Dialog.show(this, hunter, "Mas percebi que era um anão... ou uma criança...");
+				var dialog:Dialog = Dialog.show(this, hunter, "Mas percebi que era um anão... ou uma criança...");
+				Sketch.show(this, "short", dialog);
 			}
 		}
 
@@ -81,8 +84,14 @@ package scenes {
 			if(prop is Hole) {
 				if(item is Liana && !cleared) {
 					Prop.placeOnScene(this, hunter, 520, 410);
+					hunter.ID = int.MAX_VALUE - 100;
 					Dialog.show(this, hunter, "PHEW!");
 					Dialog.show(this, sherlock, "Muito bem, Epson!");
+
+					if(ForestC1.cleared) {
+						Inventory.addToInventory(new Key1());
+					}
+
 					cleared = true;
 				} else {
 					Dialog.show(this, sherlock, "Não vejo como isso poderia ajudá-lo, Epson.");

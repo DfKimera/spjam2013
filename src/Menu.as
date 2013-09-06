@@ -36,7 +36,7 @@ package {
 		public function createOptions():void {
 
 			addOption("Jogar", function():void {
-				Game.start();
+				Game.showPrologue();
 			});
 
 			addOption("Créditos", function():void {

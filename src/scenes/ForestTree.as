@@ -46,16 +46,16 @@ package scenes {
 			sherlock = new Sherlock();
 
 			if(!rackUsed) {
-				Prop.placeOnScene(this, new Rack(), 50, 240);
+				Prop.placeOnScene(this, new Rack(), 630, 240);
 			} else {
-				Prop.placeOnScene(this, new RackUsed(), 50, 240);
+				Prop.placeOnScene(this, new RackUsed(), 630, 240);
 			}
 
 			if(!keyObtained) {
 				Prop.placeOnScene(this, new Glint(), 350, 40);
 			}
 
-			Prop.placeOnScene(this, hunter, 630, 240);
+			Prop.placeOnScene(this, hunter, 50, 240);
 
 			if(cleared) {
 				hunter.play("released");
@@ -70,9 +70,10 @@ package scenes {
 		override public function onPropInteract(prop:Prop):void {
 			if(prop is Rack && !rackUsed) {
 				Inventory.addToInventory(new Hook());
-				Prop.placeOnScene(this, new RackUsed(), 50, 240);
+				Prop.placeOnScene(this, new RackUsed(), 630, 240);
 				prop.remove();
 				rackUsed = true;
+				Dialog.show(this, sherlock, "Epson, pare de pegar coisas que não são suas! Por acaso é um ladrão?");
 				return;
 			}
 
@@ -87,7 +88,8 @@ package scenes {
 			}
 
 			if(prop is Hunter3 && cleared) {
-				Dialog.show(this, hunter, "Aquele maldito, com os pés virados pra trás! Ele que me trancou aqui!");
+				var dialog:Dialog = Dialog.show(this, hunter, "Aquele maldito, com os pés virados pra trás! Ele que me trancou aqui!");
+				Sketch.show(this, "feet", dialog);
 				Dialog.show(this, sherlock, "Pés virados!? Epson, estavamos andando ao contrário desde o começo!");
 			}
 		}

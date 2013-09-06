@@ -9,14 +9,21 @@ package scenes {
 	import engine.Prop;
 	import engine.Scene;
 
+	import items.Key1;
+
+	import props.Gate;
+
 	public class VillageScene extends Scene {
 
 		[Embed(source="../../assets/scene_village.png")]
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock = new Sherlock();
+		public var treePortal:Portal;
+		public var gate:Gate;
 
 		public static var visited:Boolean = false;
+		public static var gateOpen:Boolean = false;
 
 		public override function prepare():void {
 			setBackground(BACKGROUND);
@@ -41,30 +48,33 @@ package scenes {
 			}
 
 			Portal.placeOnScene(this, "Clareira", 650, 350, 150, 250, ForestC2);
-			Portal.placeOnScene(this, "Árvore", 290, 180, 100, 150, ForestTree);
+			treePortal = Portal.placeOnScene(this, "Árvore", 260, 0, 140, 300, ForestTree);
 
-			// TODO: add gate, openable with key, leads to C3
+			gate = Prop.placeOnScene(this, new Gate(), 270, 0) as Gate;
 
+			if(gateOpen) {
+				openGate();
+			}
+
+		}
+
+		public function openGate():void {
+			treePortal.ID = int.MAX_VALUE - 100;
+			gate.play("open");
+			gateOpen = true;
 		}
 
 		override public function onPropInteract(prop:Prop):void {
-
+			if(prop is Gate && !gateOpen) {
+				Dialog.show(this, sherlock, "Droga, o portão está fechado... Com quem será que está a chave?");
+			}
 		}
 
 		override public function onItemUse(prop:Prop,item:Item):void {
-
-		}
-
-		override public function onItemPick(item:Item):void {
-
-		}
-
-		override public function onItemCombine(item1:Item,item2:Item):void {
-
-		}
-
-		override public function onBackgroundClick(x:int,y:int):void {
-
+			if(prop is Gate && item is Key1 && !gateOpen) {
+				item.consume();
+				openGate();
+			}
 		}
 	}
 }

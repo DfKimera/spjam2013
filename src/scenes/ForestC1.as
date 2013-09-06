@@ -12,6 +12,7 @@ package scenes {
 	import engine.Scene;
 
 	import items.DryLeaves;
+	import items.Key1;
 
 	import items.Knife;
 
@@ -92,11 +93,18 @@ package scenes {
 				} else {
 					Dialog.show(this, hunter, "Obrigado, senhores!");
 					Dialog.show(this, sherlock, "Disponha, nobre rapaz. Agora, me diga, quem foi que te pendurou ali?", "default", "bottom");
-					Dialog.show(this, hunter, "Não vi direito, só reparei que era bem ruivo, cabelo todo bagunçado!");
+					var dialog:Dialog = Dialog.show(this, hunter, "Não vi direito, só reparei que era bem ruivo, cabelo todo bagunçado!");
+					Sketch.show(this, "ginger", dialog);
 
 					if(!portalCreated) {
 						portalCreated = true;
+
+						if(ForestC2.cleared) {
+							Inventory.addToInventory(new Key1());
+						}
+
 						cleared = true;
+
 						Portal.placeOnScene(this, "to_village", 250, 0, 330, 380, VillageScene);
 					}
 				}

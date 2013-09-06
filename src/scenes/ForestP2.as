@@ -14,6 +14,7 @@ package scenes {
 	import items.Liana;
 	import items.Plank;
 	import items.RustyKnife;
+	import items.Scissors;
 
 	import props.Boulder;
 	import props.BoulderWithPlank;
@@ -100,6 +101,11 @@ package scenes {
 				return;
 			}
 
+			if(prop is LianaPlaced && item is Scissors) {
+				Dialog.show(this, sherlock, "Gah! Cipó é forte demais para cortar com tesoura!");
+				return;
+			}
+
 			if(prop is Boulder && item is Plank) {
 				prop.remove();
 				item.consume();
@@ -109,7 +115,11 @@ package scenes {
 				plankPlaced = true;
 
 				Dialog.show(this, sherlock, "Boa sacada, Epson! Agora suba lá e pegue esse cipó!");
+				return;
 			}
+
+			Dialog.show(this, sherlock, "O que você está fazendo, Epson?")
+
 		}
 
 	}

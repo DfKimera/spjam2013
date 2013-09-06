@@ -10,7 +10,10 @@ package props {
 
 		public function Gate() {
 			super();
-			loadGraphic(SPRITE);
+			loadGraphic(SPRITE, true, false, 149, 339);
+			addAnimation("open", [0]);
+			addAnimation("closed", [1]);
+			play("closed");
 		}
 
 		/**

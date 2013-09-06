@@ -1,6 +1,9 @@
 package scenes {
 
+	import characters.Curupira;
 	import characters.Sherlock;
+
+	import engine.Dialog;
 
 	import engine.Item;
 	import engine.Prop;
@@ -11,7 +14,8 @@ package scenes {
 		[Embed(source="../../assets/scene_ending.png")]
 		public var BACKGROUND:Class;
 
-		public var sherlock:Sherlock = new Sherlock();
+		public var sherlock:Sherlock;
+		public var curupira:Curupira;
 
 		public override function prepare():void {
 			setBackground(BACKGROUND);
@@ -20,9 +24,20 @@ package scenes {
 
 		public override function create():void {
 
-			sherlock = new Sherlock();
-
 			super.create();
+
+			sherlock = new Sherlock();
+			curupira = new Curupira();
+
+			Prop.placeOnScene(this, curupira, 540, 225);
+
+			Dialog.show(this, sherlock, "Veja, Epson! Um capiroto!");
+			Dialog.show(this, curupira, "Meu nome é Curupira!");
+			Dialog.show(this, sherlock, "Você tem os pés pra trás!");
+			var lastDialog:Dialog = Dialog.show(this, curupira, "Você que tem o corpo ao contrário!");
+			lastDialog.onCloseCallback = function():void {
+				Game.showEpilogue();
+			};
 
 		}
 
