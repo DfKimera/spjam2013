@@ -21,7 +21,7 @@ package engine {
 		[Embed(source="../../assets/komika.ttf", fontFamily="komika", embedAsCFF="false")]
 		private var TEXT_FONT:Class;
 
-		public var isActive:Boolean = true;
+		public var isActive:Boolean = false;
 		public var isCompleted:Boolean = false;
 		public var scene:Scene;
 
@@ -99,9 +99,10 @@ package engine {
 				Cursor.useSkip();
 			}
 
-			if(FlxG.keys.justPressed("ENTER") && isActive) {
+			if((FlxG.keys.justPressed("ENTER") || FlxG.keys.justPressed("SPACE")) && isActive) {
 				this.skipDialog();
 			}
+
 		}
 
 		public function skipDialog(spr:FlxExtendedSprite = null, x:int = 0, y:int = 0):void {
@@ -154,6 +155,7 @@ package engine {
 		private function show():void {
 			resetPortraitPosition();
 			scene.dialog.add(this);
+			isActive = true;
 			fxTimer.start(Config.DIALOG_CHARACTER_DELAY, 0, this.displayMoreCharacters);
 		}
 
