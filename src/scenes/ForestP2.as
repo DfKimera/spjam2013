@@ -73,7 +73,7 @@ package scenes {
 			}
 
 			if(prop is Boulder) {
-				Dialog.show(this, sherlock, "A pedra é irregular e escorregadia demais! Talvez se eu tivesse alguma apoio...");
+				Dialog.show(this, sherlock, "A pedra é irregular e escorregadia demais! Talvez se eu tivesse algum apoio...");
 				return;
 			}
 
