@@ -5,7 +5,6 @@ package engine {
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxText;
 	import org.flixel.FlxTimer;
-	import org.flixel.plugin.photonstorm.FlxDelay;
 	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Dialog extends FlxGroup {
@@ -19,7 +18,7 @@ package engine {
 		[Embed(source="../../assets/comiczine.otf", fontFamily="comiczine", embedAsCFF="false")]
 		private var TITLE_FONT:Class;
 
-		[Embed(source="../../assets/cartoonisthand.ttf", fontFamily="cartoonisthand", embedAsCFF="false")]
+		[Embed(source="../../assets/komika.ttf", fontFamily="komika", embedAsCFF="false")]
 		private var TEXT_FONT:Class;
 
 		public var isActive:Boolean = true;
@@ -81,7 +80,7 @@ package engine {
 			add(title);
 
 			text = new FlxText(textOffset[0], textOffset[1] + offsetY, textOffset[2], "");
-			text.setFormat("cartoonisthand", 20, 0xFFFFFF, "left", 0xFF000000);
+			text.setFormat("komika", 18, 0xFFFFFF, "left", 0xFF000000);
 			add(text);
 
 
