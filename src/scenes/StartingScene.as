@@ -14,7 +14,7 @@ package scenes {
 
 	public class StartingScene extends Scene {
 
-		[Embed(source="../../assets/scene_start.png")]
+		[Embed(source="../../assets/scene_start.jpg")]
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock;
@@ -24,6 +24,7 @@ package scenes {
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
+			Game.playMusic("game");
 		}
 
 		public override function create():void {
@@ -33,8 +34,8 @@ package scenes {
 			sherlock = new Sherlock();
 
 			if(!visited) {
-				Dialog.show(this, sherlock, "Veja Watson! Pegadas!");
-				Dialog.show(this, sherlock, "Qual caminho devemos seguir?");
+				Dialog.show(this, sherlock, "Veja Watson! Pegadas!").sound("surprise");
+				Dialog.show(this, sherlock, "Qual caminho devemos seguir?").sound("wonder");
 			}
 
 			Portal.placeOnScene(this, "Floresta", 0, 80, 120, 400, ForestP1);
@@ -53,23 +54,23 @@ package scenes {
 
 		override public function onPropInteract(prop:Prop):void {
 			if(Portal.checkIfIs(prop, "Pegadas")) {
-				Dialog.show(this, sherlock, "Alguem não fez questão de esconder os rastros");
+				Dialog.show(this, sherlock, "Alguem não fez questão de esconder os rastros").sound("dialog");
 				return;
 			}
 
 			if(prop is Sherlock) {
-				Dialog.show(this, sherlock, "Não fique aí parado, Epson! Me ajude a procurar pistas!");
+				Dialog.show(this, sherlock, "Não fique aí parado, Epson! Me ajude a procurar pistas!").sound("taunt");
 			}
 		}
 
 		override public function onItemUse(prop:Prop, item:Item):void {
-			Dialog.show(this, sherlock,  "O que você está fazendo, Epson?");
+			Dialog.show(this, sherlock,  "O que você está fazendo, Epson?").sound("taunt");
 		}
 
 		override public function onItemPick(item:Item):void {
 
 			if(item is ScissorsPiece1) {
-				Dialog.show(this, sherlock, "Não fique pegando lixo, Epson!");
+				Dialog.show(this, sherlock, "Não fique pegando lixo, Epson!").sound("taunt");
 				Inventory.show();
 			}
 

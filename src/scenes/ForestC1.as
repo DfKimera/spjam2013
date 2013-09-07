@@ -23,7 +23,7 @@ package scenes {
 
 	public class ForestC1 extends Scene {
 
-		[Embed(source="../../assets/scene_c1.png")]
+		[Embed(source="../../assets/scene_c1.jpg")]
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock = new Sherlock();
@@ -41,6 +41,7 @@ package scenes {
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
+			Game.playMusic("game");
 		}
 
 		public override function create():void {
@@ -52,7 +53,7 @@ package scenes {
 			hunter = new Hunter1();
 
 			if(!visited) {
-				Dialog.show(this, sherlock, "Mexa esse traseiro gordo, Epson! Salve o nobre rapaz!", "default", "bottom");
+				Dialog.show(this, sherlock, "Mexa esse traseiro gordo, Epson! Salve o nobre rapaz!", "default", "bottom").sound("taunt");
 			}
 
 			Prop.placeOnScene(this, cushion, 370, 470);
@@ -89,11 +90,11 @@ package scenes {
 		override public function onPropInteract(prop:Prop):void {
 			if(prop is Hunter1) {
 				if(!hunterIsReleased) {
-					Dialog.show(this, hunter, "Me tire daqui!!", "hanging", "bottom");
+					Dialog.show(this, hunter, "Me tire daqui!!", "hanging", "bottom").sound("cry");
 				} else {
-					Dialog.show(this, hunter, "Obrigado, senhores!");
-					Dialog.show(this, sherlock, "Disponha, nobre rapaz. Agora, me diga, quem foi que te pendurou ali?", "default", "bottom");
-					var dialog:Dialog = Dialog.show(this, hunter, "Não vi direito, só reparei que era bem ruivo, cabelo todo bagunçado!");
+					Dialog.show(this, hunter, "Obrigado, senhores!").sound("thanks");
+					Dialog.show(this, sherlock, "Disponha, nobre rapaz. Agora, me diga, quem foi que te pendurou ali?", "default", "bottom").sound("dialog");
+					var dialog:Dialog = Dialog.show(this, hunter, "Não vi direito, só reparei que era bem ruivo, cabelo todo bagunçado!").sound("dialog");
 					Sketch.show(this, "ginger", dialog);
 
 					if(!portalCreated) {
@@ -101,6 +102,7 @@ package scenes {
 
 						if(ForestC2.cleared) {
 							Inventory.addToInventory(new Key1());
+							Dialog.show(this, hunter, "Aqui, tome a chave do portão da cidade. Ele deve ter se escondido na mata fechada.").sound("dialog");
 						}
 
 						cleared = true;
@@ -113,12 +115,12 @@ package scenes {
 
 		override public function onItemUse(prop:Prop,item:Item):void {
 			if(prop is Hunter1 && item is RustyKnife) {
-				Dialog.show(this, sherlock, "A faca está cega demais para cortar! Puxa, se tivessemos algo mais... cortante...", "default", "bottom");
+				Dialog.show(this, sherlock, "A faca está cega demais para cortar! Puxa, se tivessemos algo mais... cortante...", "default", "bottom").sound("wonder");
 				return;
 			}
 
 			if(prop is Hunter1 && item is Scissors) {
-				Dialog.show(this, sherlock, "A corda é forte demais para cortar com uma tesoura...", "default", "bottom");
+				Dialog.show(this, sherlock, "A corda é forte demais para cortar com uma tesoura...", "default", "bottom").sound("dialog");
 				return;
 			}
 
@@ -132,11 +134,11 @@ package scenes {
 			if(prop is Hunter1 && item is Knife) {
 
 				if(!cushionIsPlaced) {
-					Dialog.show(this, sherlock, "Espere! Precisamos de algo para amortecer a queda! Veja se encontra algo por aí!");
+					Dialog.show(this, sherlock, "Espere! Precisamos de algo para amortecer a queda! Veja se encontra algo por aí!").sound("taunt");
 					return;
 				}
 
-				Dialog.show(this, hunter, "WAAAAH!");
+				Dialog.show(this, hunter, "WAAAAH!").sound("cry");
 				hunter.play("sitting");
 				hunterIsReleased = true;
 
@@ -145,16 +147,9 @@ package scenes {
 
 		override public function onItemPick(item:Item):void {
 			if(item is RustyKnife) {
-				Dialog.show(this, sherlock, "Hmm, o que fazer com uma faca sem fio?");
+				Dialog.show(this, sherlock, "Hmm, o que fazer com uma faca sem fio?").sound("wonder");
 			}
 		}
 
-		override public function onItemCombine(item1:Item,item2:Item):void {
-
-		}
-
-		override public function onBackgroundClick(x:int,y:int):void {
-
-		}
 	}
 }

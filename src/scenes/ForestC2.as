@@ -20,7 +20,7 @@ package scenes {
 
 	public class ForestC2 extends Scene {
 
-		[Embed(source="../../assets/scene_c2.png")]
+		[Embed(source="../../assets/scene_c2.jpg")]
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock = new Sherlock();
@@ -34,6 +34,7 @@ package scenes {
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
+			Game.playMusic("game");
 		}
 
 		public override function create():void {
@@ -63,19 +64,19 @@ package scenes {
 		override public function onPropInteract(prop:Prop):void {
 			if(prop is Hole) {
 				if(!cleared) {
-					Dialog.show(this, hunter, "Me tirem daqui!!");
-					Dialog.show(this, sherlock, "Como podemos ajudá-lo, Epson?");
+					Dialog.show(this, hunter, "Me tirem daqui!!").sound("hole");
+					Dialog.show(this, sherlock, "Como podemos ajudá-lo, Epson?").sound("wonder");
 				} else {
-					Dialog.show(this, sherlock, "É um buraco bem fundo!");
+					Dialog.show(this, sherlock, "É um buraco bem fundo!").sound("dialog");
 				}
 				return;
 			}
 
 			if(prop is Hunter2) {
-				Dialog.show(this, hunter, "Phew! Obrigado!!");
-				Dialog.show(this, sherlock, "Pois bem! Me diga, quem foi que te colocou aí?");
-				Dialog.show(this, hunter, "Ele me pegou de costas, não consegui ver...");
-				var dialog:Dialog = Dialog.show(this, hunter, "Mas percebi que era um anão... ou uma criança...");
+				Dialog.show(this, hunter, "Phew! Obrigado!!").sound("dialog");
+				Dialog.show(this, sherlock, "Pois bem! Me diga, quem foi que te colocou aí?").sound("dialog");
+				Dialog.show(this, hunter, "Ele me pegou de costas, não consegui ver...").sound("dialog");
+				var dialog:Dialog = Dialog.show(this, hunter, "Mas percebi que era um anão... ou uma criança...").sound("dialog");
 				Sketch.show(this, "short", dialog);
 			}
 		}
@@ -85,23 +86,24 @@ package scenes {
 				if(item is Liana && !cleared) {
 					Prop.placeOnScene(this, hunter, 520, 410);
 					hunter.ID = int.MAX_VALUE - 100;
-					Dialog.show(this, hunter, "PHEW!");
-					Dialog.show(this, sherlock, "Muito bem, Epson!");
+					Dialog.show(this, hunter, "PHEW!").sound("dialog");
+					Dialog.show(this, sherlock, "Muito bem, Epson!").sound("surprise");
 
 					if(ForestC1.cleared) {
 						Inventory.addToInventory(new Key1());
+						Dialog.show(this, hunter, "Aqui, tome a chave do portão da cidade. Ele deve ter se escondido na mata fechada.").sound("dialog");
 					}
 
 					cleared = true;
 				} else {
-					Dialog.show(this, sherlock, "Não vejo como isso poderia ajudá-lo, Epson.");
+					Dialog.show(this, sherlock, "Não vejo como isso poderia ajudá-lo, Epson.").sound("taunt");
 				}
 			}
 		}
 
 		override public function onItemPick(item:Item):void {
 			if(item is Plank) {
-				Dialog.show(this, sherlock, "Você daria um bom lixeiro, Epson...");
+				Dialog.show(this, sherlock, "Você daria um bom lixeiro, Epson...").sound("taunt");
 			}
 		}
 	}

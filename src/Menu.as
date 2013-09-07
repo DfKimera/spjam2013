@@ -1,5 +1,7 @@
 package {
 
+	import engine.SFX;
+
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxSprite;
@@ -11,7 +13,7 @@ package {
 		private var buttonHeight:int = 60;
 		private var baseY:int = 0;
 
-		[Embed(source="../assets/menu_background.png")]
+		[Embed(source="../assets/menu_background.jpg")]
 		public var BACKGROUND_SPRITE:Class;
 
 		public var background:FlxSprite;
@@ -21,7 +23,9 @@ package {
 
 		public var selectedOption:int = -1;
 
-		public function Menu() {
+		public override function create():void {
+
+			Game.playMusic("menu");
 
 			background = new FlxSprite(0,0);
 			background.loadGraphic(BACKGROUND_SPRITE);

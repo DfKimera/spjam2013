@@ -15,7 +15,7 @@ package scenes {
 
 	public class VillageScene extends Scene {
 
-		[Embed(source="../../assets/scene_village.png")]
+		[Embed(source="../../assets/scene_village.jpg")]
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock = new Sherlock();
@@ -28,6 +28,7 @@ package scenes {
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
+			Game.playMusic("game");
 		}
 
 		public override function create():void {
@@ -37,7 +38,7 @@ package scenes {
 			sherlock = new Sherlock();
 
 			if(!visited) {
-				Dialog.show(this,sherlock, "Veja, Epson! Uma aldeia! Parece abandonada...");
+				Dialog.show(this,sherlock, "Veja, Epson! Uma aldeia! Parece abandonada...").sound("surprise");
 				visited = true;
 			}
 
@@ -66,7 +67,7 @@ package scenes {
 
 		override public function onPropInteract(prop:Prop):void {
 			if(prop is Gate && !gateOpen) {
-				Dialog.show(this, sherlock, "Droga, o portão está fechado... Com quem será que está a chave?");
+				Dialog.show(this, sherlock, "Droga, o portão está fechado... Com quem será que está a chave?").sound("wonder");
 			}
 		}
 

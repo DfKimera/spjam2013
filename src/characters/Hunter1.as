@@ -9,9 +9,15 @@ package characters {
 
 		[Embed("../../assets/portrait_hunter1.png")]
 		public var PORTRAIT_DEFAULT:Class;
-
 		[Embed("../../assets/portrait_hunter1_hanging.png")]
 		public var PORTRAIT_HANGING:Class;
+
+		[Embed("../../assets/voice/hunter1_cry.mp3")]
+		public var SOUND_CRY:Class;
+		[Embed("../../assets/voice/hunter1_dialog.mp3")]
+		public var SOUND_DIALOG:Class;
+		[Embed("../../assets/voice/hunter1_thanks.mp3")]
+		public var SOUND_THANKS:Class;
 
 		public function Hunter1() {
 			super();
@@ -28,6 +34,7 @@ package characters {
 				'hanging': [PORTRAIT_HANGING, false]
 			});
 		}
+
 
 	}
 }

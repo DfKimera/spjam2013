@@ -19,6 +19,17 @@ package {
 
 		public static var instance:Game;
 
+		[Embed(source="../assets/game_background.mp3")]
+		public static var BGM_GAME:Class;
+		[Embed(source="../assets/story_theme.mp3")]
+		public static var BGM_STORY:Class;
+		[Embed(source="../assets/menu_theme.mp3")]
+		public static var BGM_MENU:Class;
+		[Embed(source="../assets/credits_theme.mp3")]
+		public static var BGM_CREDITS:Class;
+
+		public static var currentBGM:String = null;
+
 		public function Game() {
 
 			Security.allowDomain("*");
@@ -80,6 +91,16 @@ package {
 		 */
 		public static function showEpilogue():void {
 			Game.transitionToScene(new Epilogue());
+		}
+
+		/**
+		 * Plays a background music
+		 * @param name String
+		 */
+		public static function playMusic(name:String):void {
+			if(currentBGM == name) { return; }
+			currentBGM = name;
+			FlxG.playMusic(Game["BGM_" + name.toUpperCase()], 0.5);
 		}
 
 		/**

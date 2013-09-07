@@ -15,6 +15,7 @@ package scenes {
 
 		public override function prepare():void {
 			pages = [COMIC_PAGE_1, COMIC_PAGE_2, COMIC_PAGE_3];
+			Game.playMusic("story");
 		}
 
 		public override function onFinish():void {

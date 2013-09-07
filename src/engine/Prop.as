@@ -22,6 +22,8 @@ package engine {
 				}
 			}
 
+			SFX.play("click");
+
 			this.onInteract();
 
 			if(FlxG.state is Scene) {
@@ -33,6 +35,8 @@ package engine {
 		protected function _onItemUse(item:Item):void {
 
 			trace("Used item on prop", this, item);
+
+			SFX.play("use");
 
 			item._onUse();
 			this.onItemUse(item);

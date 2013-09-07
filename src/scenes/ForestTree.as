@@ -23,7 +23,7 @@ package scenes {
 
 	public class ForestTree extends Scene {
 
-		[Embed(source="../../assets/scene_tree.png")]
+		[Embed(source="../../assets/scene_tree.jpg")]
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock = new Sherlock();
@@ -37,6 +37,7 @@ package scenes {
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
+			Game.playMusic("game");
 		}
 
 		public override function create():void {
@@ -73,24 +74,24 @@ package scenes {
 				Prop.placeOnScene(this, new RackUsed(), 630, 240);
 				prop.remove();
 				rackUsed = true;
-				Dialog.show(this, sherlock, "Epson, pare de pegar coisas que não são suas! Por acaso é um ladrão?");
+				Dialog.show(this, sherlock, "Epson, pare de pegar coisas que não são suas! Por acaso é um ladrão?").sound("taunt");
 				return;
 			}
 
 			if(prop is Glint) {
-				Dialog.show(this, sherlock, "Olhos de lince, Epson! Mas, como vamos pegá-la?");
+				Dialog.show(this, sherlock, "Olhos de lince, Epson! Mas, como vamos pegá-la?").sound("surprise");
 				return;
 			}
 
 			if(prop is Hunter3 && !cleared) {
-				Dialog.show(this, hunter, "Me tirem daqui!!");
+				Dialog.show(this, hunter, "Me tirem daqui!!").sound("jailed");
 				return;
 			}
 
 			if(prop is Hunter3 && cleared) {
-				var dialog:Dialog = Dialog.show(this, hunter, "Aquele maldito, com os pés virados pra trás! Ele que me trancou aqui!");
+				var dialog:Dialog = Dialog.show(this, hunter, "Aquele maldito, com os pés virados pra trás! Ele que me trancou aqui!").sound("dialog");
 				Sketch.show(this, "feet", dialog);
-				Dialog.show(this, sherlock, "Pés virados!? Epson, estavamos andando ao contrário desde o começo!");
+				Dialog.show(this, sherlock, "Pés virados!? Epson, estavamos andando ao contrário desde o começo!").sound("surprise");
 			}
 		}
 
@@ -100,12 +101,12 @@ package scenes {
 				item.consume();
 				Inventory.addToInventory(new Key2());
 				keyObtained = true;
-				Dialog.show(this, sherlock, "Excelente mira, Epson!");
+				Dialog.show(this, sherlock, "Excelente mira, Epson!").sound("surprise");
 				return;
 			}
 
 			if(item is Hook && prop is Glint) {
-				Dialog.show(this, sherlock, "O gancho não alcança... precisamos dar um jeito de conseguir alcançar e puxar de volta...");
+				Dialog.show(this, sherlock, "O gancho não alcança... precisamos dar um jeito de conseguir alcançar e puxar de volta...").sound("wonder");
 				return;
 			}
 
@@ -113,11 +114,11 @@ package scenes {
 				cleared = true;
 				hunter.play("released");
 				item.consume();
-				Dialog.show(this, hunter, "Ahh! Obrigado!");
+				Dialog.show(this, hunter, "Ahh! Obrigado!").sound("dialog");
 				return;
 			}
 
-			Dialog.show(this, sherlock, "Não vejo como isso poderia ajudá-lo, Epson...");
+			Dialog.show(this, sherlock, "Não vejo como isso poderia ajudá-lo, Epson...").sound("taunt");
 		}
 	}
 }

@@ -1,4 +1,6 @@
 package {
+	import engine.SFX;
+
 	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class MenuOption extends FlxExtendedSprite {
@@ -8,6 +10,7 @@ package {
 
 		private var onTriggerHandler:Function;
 		private var isOver:Boolean = false;
+		private var playedSFX:Boolean = false;
 
 		public function MenuOption(item:String, onTriggerHandler:Function) {
 
@@ -48,6 +51,7 @@ package {
 
 		public function trigger():void {
 			trace("Menu option trigger: ", this);
+			SFX.play("bell");
 			if(this.onTriggerHandler is Function) {
 				this.onTriggerHandler.call();
 			}

@@ -30,6 +30,8 @@ package engine {
 		override protected function _onInteract(spr:FlxExtendedSprite, x:int, y:int):void {
 			super._onInteract(spr, x, y);
 
+			SFX.play("click");
+
 			if(this.nextScene is Class) {
 				Inventory.releaseItemOnCursor();
 				Game.transitionToScene(new this.nextScene());

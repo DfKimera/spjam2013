@@ -3,6 +3,8 @@ package characters {
 	import engine.Character;
 	import engine.Item;
 
+	import org.flixel.FlxG;
+
 	public class Curupira extends Character {
 
 		[Embed("../../assets/character_curupira.png")]
@@ -10,6 +12,11 @@ package characters {
 
 		[Embed("../../assets/portrait_curupira.png")]
 		public var PORTRAIT_DEFAULT:Class;
+
+		[Embed("../../assets/voice/curupira_me.mp3")]
+		public var SOUND_ME:Class;
+		[Embed("../../assets/voice/curupira_you.mp3")]
+		public var SOUND_YOU:Class;
 
 		public function Curupira() {
 			super();
@@ -21,14 +28,6 @@ package characters {
 			this.setPortraits({
 				'default': [PORTRAIT_DEFAULT, false]
 			});
-		}
-
-		public override function onInteract():void {
-
-		}
-
-		public override function onItemUse(item:Item):void {
-
 		}
 
 	}

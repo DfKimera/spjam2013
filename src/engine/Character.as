@@ -1,4 +1,6 @@
 package engine {
+	import org.flixel.FlxG;
+	import org.flixel.FlxSound;
 	import org.flixel.FlxSprite;
 
 	public class Character extends Prop {
@@ -46,6 +48,12 @@ package engine {
 		 */
 		public function getPortrait(expression:String):FlxSprite {
 			return portraitSprites[expression];
+		}
+
+		public function playSound(soundName:String):FlxSound {
+			var sound:Class = this["SOUND_" + soundName.toUpperCase()];
+			trace("Voice: ", sound);
+			return FlxG.play(sound, 0.5);
 		}
 
 	}

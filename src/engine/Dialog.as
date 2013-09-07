@@ -1,7 +1,10 @@
 package engine {
 
+	import flash.utils.setTimeout;
+
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
+	import org.flixel.FlxSound;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxText;
 	import org.flixel.FlxTimer;
@@ -46,6 +49,9 @@ package engine {
 		public var text:FlxText;
 		public var textOffset:Array = [125, 52, 610];
 
+		private static var currentSFX:FlxSound = null;
+		private var soundToPlay:String = null;
+
 		public var onCloseCallback:Function = null;
 
 		public function Dialog(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top") {
@@ -89,6 +95,11 @@ package engine {
 		private function resetPortraitPosition():void {
 			portrait.x = portraitOffset[0];
 			portrait.y = portraitOffset[1] + offsetY;
+		}
+
+		public function sound(name:String):Dialog {
+			soundToPlay = name;
+			return this;
 		}
 
 		public override function update():void {
@@ -191,6 +202,15 @@ package engine {
 
 			dialog.setAll("alpha", 0);
 			dialog.show();
+
+			setTimeout(function():void {
+				if(dialog.soundToPlay != null) {
+					if(Dialog.currentSFX is FlxSound) {
+						Dialog.currentSFX.stop();
+					}
+					Dialog.currentSFX = dialog.character.playSound(dialog.soundToPlay);
+				}
+			}, 1);
 
 			Utils.fadeInGroup(dialog, Config.DIALOG_FADE_DELAY);
 		}

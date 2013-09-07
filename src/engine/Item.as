@@ -104,6 +104,8 @@ package engine {
 		 */
 		public function _onPick(spr:FlxExtendedSprite, x:int, y:int):void {
 
+			SFX.play("pick");
+
 			if(Inventory.isHoldingItem()) {
 				return;
 			}
@@ -130,6 +132,7 @@ package engine {
 		public function _onCombine(item:Item):void {
 			trace("Combining items: ", this, item);
 			Inventory.releaseItemOnCursor();
+			SFX.play("bell");
 			this.onCombine(item);
 			(FlxG.state as Scene).onItemCombine(this, item);
 			Inventory.redrawGrid();

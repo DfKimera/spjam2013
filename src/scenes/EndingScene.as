@@ -11,7 +11,7 @@ package scenes {
 
 	public class EndingScene extends Scene {
 
-		[Embed(source="../../assets/scene_ending.png")]
+		[Embed(source="../../assets/scene_ending.jpg")]
 		public var BACKGROUND:Class;
 
 		public var sherlock:Sherlock;
@@ -20,6 +20,7 @@ package scenes {
 		public override function prepare():void {
 			setBackground(BACKGROUND);
 			setFadeInDelay(1);
+			Game.playMusic("story");
 		}
 
 		public override function create():void {
@@ -31,34 +32,15 @@ package scenes {
 
 			Prop.placeOnScene(this, curupira, 540, 225);
 
-			Dialog.show(this, sherlock, "Veja, Epson! Um capiroto!");
-			Dialog.show(this, curupira, "Meu nome é Curupira!");
-			Dialog.show(this, sherlock, "Você tem os pés pra trás!");
-			var lastDialog:Dialog = Dialog.show(this, curupira, "Você que tem o corpo ao contrário!");
+			Dialog.show(this, sherlock, "Veja, Epson! Um capiroto!").sound("surprise");
+			Dialog.show(this, curupira, "Meu nome é Curupira!").sound("me");
+			Dialog.show(this, sherlock, "Você tem os pés pra trás!").sound("dialog");
+			var lastDialog:Dialog = Dialog.show(this, curupira, "Você que tem o corpo ao contrário!").sound("you");
 			lastDialog.onCloseCallback = function():void {
 				Game.showEpilogue();
 			};
 
 		}
 
-		override public function onPropInteract(prop:Prop):void {
-
-		}
-
-		override public function onItemUse(prop:Prop,item:Item):void {
-
-		}
-
-		override public function onItemPick(item:Item):void {
-
-		}
-
-		override public function onItemCombine(item1:Item,item2:Item):void {
-
-		}
-
-		override public function onBackgroundClick(x:int,y:int):void {
-
-		}
 	}
 }
