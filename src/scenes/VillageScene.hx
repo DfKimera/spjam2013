@@ -8,6 +8,7 @@ import engine.Prop;
 import engine.Scene;
 import items.Key1;
 import props.Gate;
+import Lang;
 
 class VillageScene extends Scene
 {
@@ -36,21 +37,21 @@ class VillageScene extends Scene
         
         if (!visited)
         {
-            Dialog.show(this, sherlock, "Veja, Epson! Uma aldeia! Parece abandonada...").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.village.village_found")).sound("surprise");
             visited = true;
         }
         
         if (ForestC1.cleared)
         {
-            Portal.placeOnScene(this, "Clareira", 0, 350, 150, 250, ForestC1);
+            Portal.placeOnScene(this, Lang.get("portal.clearing"), 0, 350, 150, 250, ForestC1);
         }
         else
         {
-            Portal.placeOnScene(this, "Floresta", 0, 350, 150, 250, ForestP1);
+            Portal.placeOnScene(this, Lang.get("portal.forest"), 0, 350, 150, 250, ForestP1);
         }
-        
-        Portal.placeOnScene(this, "Clareira", 650, 350, 150, 250, ForestC2);
-        treePortal = Portal.placeOnScene(this, "Árvore", 260, 0, 140, 300, ForestTree);
+
+        Portal.placeOnScene(this, Lang.get("portal.clearing"), 650, 350, 150, 250, ForestC2);
+        treePortal = Portal.placeOnScene(this, Lang.get("portal.tree"), 260, 0, 140, 300, ForestTree);
         
         gate = try cast(Prop.placeOnScene(this, new Gate(), 270, 0), Gate) catch(e:Dynamic) null;
         
@@ -71,7 +72,7 @@ class VillageScene extends Scene
     {
         if (Std.is(prop, Gate) && !gateOpen)
         {
-            Dialog.show(this, sherlock, "Droga, o portão está fechado... Com quem será que está a chave?").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.village.gate_locked")).sound("wonder");
         }
     }
     

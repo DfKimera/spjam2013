@@ -8,6 +8,7 @@ import engine.Prop;
 import engine.Scene;
 import items.ScissorsPiece1;
 import engine.Portal;
+import Lang;
 
 class StartingScene extends Scene
 {
@@ -33,15 +34,15 @@ class StartingScene extends Scene
         
         if (!visited)
         {
-            Dialog.show(this, sherlock, "Veja Watson! Pegadas!").sound("surprise");
-            Dialog.show(this, sherlock, "Qual caminho devemos seguir?").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.starting.exclamation")).sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.starting.which_way")).sound("wonder");
         }
         
-        Portal.placeOnScene(this, "Floresta", 0, 80, 120, 400, ForestP1);
-        Portal.placeOnScene(this, "Floresta", 680, 80, 120, 400, ForestP2);
+        Portal.placeOnScene(this, Lang.get("portal.forest"), 0, 80, 120, 400, ForestP1);
+        Portal.placeOnScene(this, Lang.get("portal.forest"), 680, 80, 120, 400, ForestP2);
         
         Prop.placeOnScene(this, sherlock, 540, 225);
-        Portal.placeOnScene(this, "Pegadas", 250, 400, 270, 200);
+        Portal.placeOnScene(this, Lang.get("portal.footprints"), 250, 400, 270, 200);
         
         if (!Inventory.hasItemOfType("items::Scissors"))
         {
@@ -55,26 +56,26 @@ class StartingScene extends Scene
     {
         if (Portal.checkIfIs(prop, "Pegadas"))
         {
-            Dialog.show(this, sherlock, "Alguem não fez questão de esconder os rastros").sound("dialog");
+            Dialog.show(this, sherlock, Lang.get("scene.starting.tracks")).sound("dialog");
             return;
         }
         
         if (Std.is(prop, Sherlock))
         {
-            Dialog.show(this, sherlock, "Não fique aí parado, Epson! Me ajude a procurar pistas!").sound("taunt");
+            Dialog.show(this, sherlock, Lang.get("scene.starting.help_search")).sound("taunt");
         }
     }
     
     override public function onItemUse(prop : Prop, item : Item) : Void
     {
-        Dialog.show(this, sherlock, "O que você está fazendo, Epson?").sound("taunt");
+        Dialog.show(this, sherlock, Lang.get("scene.starting.what_doing")).sound("taunt");
     }
-    
+
     override public function onItemPick(item : Item) : Void
     {
         if (Std.is(item, ScissorsPiece1))
         {
-            Dialog.show(this, sherlock, "Não fique pegando lixo, Epson!").sound("taunt");
+            Dialog.show(this, sherlock, Lang.get("scene.starting.no_trash")).sound("taunt");
             Inventory.show();
         }
     }
