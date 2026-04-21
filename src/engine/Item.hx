@@ -77,7 +77,7 @@ class Item extends FlxBasic
 
     public function _onPick(spr : FlxExtendedSprite, x : Int, y : Int) : Void
     {
-        SFX.play("pick");
+        SFX.play("sfx.pick");
 
         if (Inventory.isHoldingItem())
         {
@@ -102,7 +102,7 @@ class Item extends FlxBasic
     {
         trace("Combining items: ", this, item);
         Inventory.releaseItemOnCursor();
-        SFX.play("bell");
+        SFX.play("sfx.bell");
         this.onCombine(item);
         (try cast(FlxG.state, Scene) catch(e:Dynamic) null).onItemCombine(this, item);
         Inventory.redrawGrid();

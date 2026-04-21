@@ -59,7 +59,7 @@ class MenuOption extends FlxGroup {
 
 	public function trigger() {
 		trace("Menu option trigger: ", this);
-		SFX.play("bell");
+		SFX.play("sfx.bell");
 		if (Reflect.isFunction(this.onTriggerHandler)) {
 			this.onTriggerHandler();
 		}
@@ -71,7 +71,7 @@ class MenuOption extends FlxGroup {
 
 		if (isOver || btn.mouseOver) {
 			if (current == "off") {
-				SFX.play("scroll");
+				SFX.play("sfx.scroll");
 			}
 			current = "on";
 			btn.animation.play("on");

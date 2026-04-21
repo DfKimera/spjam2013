@@ -1,49 +1,45 @@
-package engine.ui ;
+package engine.ui;
+
 import engine.SFX;
 
-import org.flixel.FlxGroup;
+import flixel.group.FlxGroup;
+import flixel.text.FlxText;
 
-import org.flixel.FlxText;
+import photonstorm.FlxExtendedSprite;
+import haxe.Constraints.Function;
 
-import org.flixel.plugin.photonstorm.FlxExtendedSprite;
-
- class UIButton extends FlxGroup {
-
-	@:meta(Embed(source="../../../assets/Raleway-Regular.ttf", fontFamily="raleway", embedAsCFF="false"))
-	public static var FONT:Class<Dynamic>;
-
-	var SPRITE:String = "assets/choice_btn.png";
+class UIButton extends FlxGroup {
 
 	var btn:FlxExtendedSprite;
-	var onTriggerHandler:ASFunction;
+	var onTriggerHandler:Function;
 	var isOver:Bool = false;
 
 	var current:String = "off";
 
 	public var title:FlxText;
 
-	public function new(item:String, onTriggerHandler:ASFunction, x:Int, y:Int) {
+	public function new(item:String, onTriggerHandler:Function, x:Float, y:Float) {
 		super();
 
 		btn = new FlxExtendedSprite();
-		btn.loadGraphic(SPRITE, true, false, 280, 40);
+		btn.loadGraphic(Assets.graphic("assets/choice_btn.png"), true, 280, 40);
 
 		this.onTriggerHandler = onTriggerHandler;
 		btn.mouseReleasedCallback = this.onClick;
 		btn.name = item;
-		btn.ID = ASCompat.MAX_INT - 10;
+		btn.ID = 1_000_000_000 - 10;
 
 		btn.x = x;
 		btn.y = y;
 
-		btn.addAnimation("off", [0]);
-		btn.addAnimation("on", [1]);
+		btn.animation.add("off", [0]);
+		btn.animation.add("on", [1]);
 
-		btn.play("off");
+		btn.animation.play("off");
 
 		add(btn);
 
-		var yOffset= (btn.name.length > 40) ? 0 : 6;
+		var yOffset = (btn.name.length > 40) ? 0 : 6;
 
 		title = new FlxText(x, y + yOffset, 280, btn.name);
 		title.setFormat("raleway", 14, 0xFFFFFF, "center", 0xFF000000);
@@ -67,26 +63,26 @@ import org.flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public function trigger() {
 		trace("Choice option trigger: ", this);
-		SFX.play("bell");
+		SFX.play("sfx.bell");
 
-		if (Reflect.isFunction(this.onTriggerHandler )) {
+		if (Reflect.isFunction(this.onTriggerHandler)) {
 			this.onTriggerHandler();
 		}
 	}
 
-	public override function update() {
+	public override function update(elapsed:Float) {
 
-		super.update();
+		super.update(elapsed);
 
 		if (isOver || btn.mouseOver) {
 			if (current == "off") {
-				SFX.play("scroll");
+				SFX.play("sfx.scroll");
 			}
 			current = "on";
-			btn.play("on");
+			btn.animation.play("on");
 		} else {
 			current = "off";
-			btn.play("off");
+			btn.animation.play("off");
 		}
 	}
 }

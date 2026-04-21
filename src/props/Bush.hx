@@ -2,16 +2,15 @@ package props;
 
 import engine.Assets;
 import engine.Prop;
+import engine.structs.AssetRegistry;
 
-class Bush extends Prop
-{
-    
-    public static final SPRITE = "assets/prop_bush.png";
-    
-    public function new()
-    {
-        super();
-        loadGraphic(Assets.graphic(SPRITE));
-    }
+class Bush extends Prop {
+
+	public function new() {
+		AssetRegistry.get()
+			.registerSprite('bush.sprite', "assets/prop_bush.png");
+
+		super();
+		loadGraphic(AssetRegistry.graphic('bush.sprite'));
+	}
 }
-

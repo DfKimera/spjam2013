@@ -8,8 +8,8 @@ class AssetRegistry {
 
 	private static var _instance:AssetRegistry;
 
-	private var _sprites:Dictionary<String, AssetReference> = new Dictionary<String, AssetReference>();
-	private var _sounds:Dictionary<String, AssetReference> = new Dictionary<String, AssetReference>();
+	public var _sprites:Dictionary<String, AssetReference> = new Dictionary<String, AssetReference>();
+	public var _sounds:Dictionary<String, AssetReference> = new Dictionary<String, AssetReference>();
 
 	public static function get(): AssetRegistry {
 		if (_instance == null) {
@@ -37,22 +37,22 @@ class AssetRegistry {
 
 	public static function getSound(name: String): AssetReference
 	{
-		if(!_sounds.exists(name)) {
+		if(!get()._sounds.exists(name)) {
 			trace("AssetRegistry: failed to load SOUND with name: ", name);
 			return null;
 		}
 
-		return _sounds[name];
+		return get()._sounds[name];
 	}
 
 	public static function getSprite(name: String): AssetReference {
 
-		if (!_sprites.exists(name)) {
+		if (!get()._sprites.exists(name)) {
 			trace("AssetRegistry: failed to load SPRITE with name: ", name);
 			return null;
 		}
 
-		return _sprites[name];
+		return get()._sprites[name];
 	}
 
 	public static function graphic(spriteName: String): FlxGraphic {
