@@ -19,7 +19,7 @@ class Inventory extends FlxGroup
     public var button : FlxExtendedSprite;
     
     private var scene : Scene;
-    public var __DOLLAR__items : FlxGroup = new FlxGroup();
+    public var _items : FlxGroup = new FlxGroup();
     public var background : FlxExtendedSprite;
     
     public var _isOpen : Bool = false;
@@ -53,7 +53,7 @@ class Inventory extends FlxGroup
         background.loadGraphic(Assets.graphic(BACKGROUND));
         
         add(background);
-        add(__DOLLAR__items);
+        add(_items);
         
         this._generateGrid();
     }
@@ -72,7 +72,7 @@ class Inventory extends FlxGroup
     
     private function _redrawGrid() : Void
     {
-        __DOLLAR__items.clear();
+        _items.clear();
         currentItem = 0;
         this._generateGrid();
     }
@@ -89,7 +89,7 @@ class Inventory extends FlxGroup
         icon.x = itemPositionOffset[0] + (col * (80 + itemMargin));
         icon.y = itemPositionOffset[1] + (row * (80 + itemMargin));
         
-        __DOLLAR__items.add(icon);
+        _items.add(icon);
         icon.ID = 10000 + (++itemIndex);
         
         currentItem++;
@@ -113,7 +113,7 @@ class Inventory extends FlxGroup
     
     override public function kill() : Void
     {
-        __DOLLAR__items.clear();
+        _items.clear();
     }
     
     private function _show() : Void

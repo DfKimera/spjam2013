@@ -15,6 +15,7 @@ import items.Scissors;
 import props.Boulder;
 import props.BoulderWithPlank;
 import props.LianaPlaced;
+import Lang;
 
 class ForestP2 extends Scene
 {
@@ -41,15 +42,15 @@ class ForestP2 extends Scene
         
         Prop.placeOnScene(this, new LianaPlaced(), 490, 0);
         
-        Portal.placeOnScene(this, "Clareira", 630, 120, 170, 270, ForestC2);
+        Portal.placeOnScene(this, Lang.get("portal.clearing"), 630, 120, 170, 270, ForestC2);
         
         if (ForestTree.cleared)
         {
-            Portal.placeOnScene(this, "Floresta", 0, 0, 150, 600, EndingScene);
+            Portal.placeOnScene(this, Lang.get("portal.forest"), 0, 0, 150, 600, EndingScene);
         }
         else
         {
-            Portal.placeOnScene(this, "Floresta", 0, 0, 150, 600, StartingScene);
+            Portal.placeOnScene(this, Lang.get("portal.forest"), 0, 0, 150, 600, StartingScene);
         }
         
         if (!plankPlaced)
@@ -70,24 +71,24 @@ class ForestP2 extends Scene
         {
             if (!plankPlaced)
             {
-                Dialog.show(this, sherlock, "Droga! Não consigo alcançar!", "default", "bottom").sound("dialog");
+                Dialog.show(this, sherlock, Lang.get("scene.forestp2.cant_reach"), "default", "bottom").sound("dialog");
             }
             else
             {
-                Dialog.show(this, sherlock, "O que você está fazendo, Epson? Pretende arrancar o cipó com as mãos!?", "default", "bottom").sound("taunt");
+                Dialog.show(this, sherlock, Lang.get("scene.forestp2.bare_hands"), "default", "bottom").sound("taunt");
             }
             return;
         }
         
         if (Std.is(prop, Boulder))
         {
-            Dialog.show(this, sherlock, "A pedra é irregular e escorregadia demais! Talvez se eu tivesse algum apoio...").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp2.slippery_rock")).sound("wonder");
             return;
         }
         
         if (Std.is(prop, BoulderWithPlank))
         {
-            Dialog.show(this, sherlock, "Não é um apoio muito firme, mas ajuda...").sound("dialog");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp2.unstable_support")).sound("dialog");
         }
     }
     
@@ -97,26 +98,26 @@ class ForestP2 extends Scene
         {
             if (!plankPlaced)
             {
-                Dialog.show(this, sherlock, "Droga! Não consigo alcançar!", "default", "bottom").sound("dialog");
+                Dialog.show(this, sherlock, Lang.get("scene.forestp2.cant_reach"), "default", "bottom").sound("dialog");
                 return;
             }
-            
+
             prop.remove();
             Inventory.addToInventory(new Liana());
-            Dialog.show(this, sherlock, "Cipós são bem fortes e dão excelentes cordas!").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp2.vine_rope")).sound("surprise");
             
             return;
         }
         
         if (Std.is(prop, LianaPlaced) && Std.is(item, RustyKnife))
         {
-            Dialog.show(this, sherlock, "Gah! A faca está cega! Se tivessemos algum lugar para afiá-la...").sound("dialog");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp2.dull_knife")).sound("dialog");
             return;
         }
         
         if (Std.is(prop, LianaPlaced) && Std.is(item, Scissors))
         {
-            Dialog.show(this, sherlock, "Gah! Cipó é forte demais para cortar com tesoura!").sound("dialog");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp2.vine_scissors")).sound("dialog");
             return;
         }
         
@@ -129,11 +130,11 @@ class ForestP2 extends Scene
             
             plankPlaced = true;
             
-            Dialog.show(this, sherlock, "Boa sacada, Epson! Agora suba lá e pegue esse cipó!").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp2.good_idea_vine")).sound("surprise");
             return;
         }
         
-        Dialog.show(this, sherlock, "O que você está fazendo, Epson?").sound("taunt");
+        Dialog.show(this, sherlock, Lang.get("scene.forestp2.what_doing")).sound("taunt");
     }
 
     public function new()

@@ -14,6 +14,7 @@ import items.Knife;
 import items.RustyKnife;
 import items.Scissors;
 import props.DryLeavesCushion;
+import Lang;
 
 class ForestC1 extends Scene
 {
@@ -49,7 +50,7 @@ class ForestC1 extends Scene
         
         if (!visited)
         {
-            Dialog.show(this, sherlock, "Mexa esse traseiro gordo, Epson! Salve o nobre rapaz!", "default", "bottom").sound("taunt");
+            Dialog.show(this, sherlock, Lang.get("scene.forestc1.save_youth"), "default", "bottom").sound("taunt");
         }
         
         Prop.placeOnScene(this, cushion, 370, 470);
@@ -78,10 +79,10 @@ class ForestC1 extends Scene
             cushionIsPlaced = true;
             portalCreated = true;
             hunter.animation.play("sitting");
-            Portal.placeOnScene(this, "Vilarejo", 250, 0, 330, 380, VillageScene);
+            Portal.placeOnScene(this, Lang.get("portal.village"), 250, 0, 330, 380, VillageScene);
         }
         
-        Portal.placeOnScene(this, "Floresta", 0, 540, 800, 60, ForestP1);
+        Portal.placeOnScene(this, Lang.get("portal.forest"), 0, 540, 800, 60, ForestP1);
         
         visited = true;
     }
@@ -92,13 +93,13 @@ class ForestC1 extends Scene
         {
             if (!hunterIsReleased)
             {
-                Dialog.show(this, hunter, "Me tire daqui!!", "hanging", "bottom").sound("cry");
+                Dialog.show(this, hunter, Lang.get("scene.forestc1.get_me_out"), "hanging", "bottom").sound("cry");
             }
             else
             {
-                Dialog.show(this, hunter, "Obrigado, senhores!").sound("thanks");
-                Dialog.show(this, sherlock, "Disponha, nobre rapaz. Agora, me diga, quem foi que te pendurou ali?", "default", "bottom").sound("dialog");
-                var dialog : Dialog = Dialog.show(this, hunter, "Não vi direito, só reparei que era bem ruivo, cabelo todo bagunçado!").sound("dialog");
+                Dialog.show(this, hunter, Lang.get("scene.forestc1.thank_you")).sound("thanks");
+                Dialog.show(this, sherlock, Lang.get("scene.forestc1.who_hung"), "default", "bottom").sound("dialog");
+                var dialog : Dialog = Dialog.show(this, hunter, Lang.get("scene.forestc1.ginger_hair")).sound("dialog");
                 Sketch.show(this, "ginger", dialog);
                 
                 if (!portalCreated)
@@ -108,12 +109,12 @@ class ForestC1 extends Scene
                     if (ForestC2.cleared)
                     {
                         Inventory.addToInventory(new Key1());
-                        Dialog.show(this, hunter, "Aqui, tome a chave do portão da cidade. Ele deve ter se escondido na mata fechada.").sound("dialog");
+                        Dialog.show(this, hunter, Lang.get("scene.forestc1.take_key")).sound("dialog");
                     }
-                    
+
                     cleared = true;
-                    
-                    Portal.placeOnScene(this, "to_village", 250, 0, 330, 380, VillageScene);
+
+                    Portal.placeOnScene(this, Lang.get("portal.village"), 250, 0, 330, 380, VillageScene);
                 }
             }
         }
@@ -123,13 +124,13 @@ class ForestC1 extends Scene
     {
         if (Std.is(prop, Hunter1) && Std.is(item, RustyKnife))
         {
-            Dialog.show(this, sherlock, "A faca está cega demais para cortar! Puxa, se tivessemos algo mais... cortante...", "default", "bottom").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.forestc1.blunt_knife"), "default", "bottom").sound("wonder");
             return;
         }
         
         if (Std.is(prop, Hunter1) && Std.is(item, Scissors))
         {
-            Dialog.show(this, sherlock, "A corda é forte demais para cortar com uma tesoura...", "default", "bottom").sound("dialog");
+            Dialog.show(this, sherlock, Lang.get("scene.forestc1.rope_too_strong"), "default", "bottom").sound("dialog");
             return;
         }
         
@@ -145,11 +146,11 @@ class ForestC1 extends Scene
         {
             if (!cushionIsPlaced)
             {
-                Dialog.show(this, sherlock, "Espere! Precisamos de algo para amortecer a queda! Veja se encontra algo por aí!").sound("taunt");
+                Dialog.show(this, sherlock, Lang.get("scene.forestc1.cushion_first")).sound("taunt");
                 return;
             }
             
-            Dialog.show(this, hunter, "WAAAAH!").sound("cry");
+            Dialog.show(this, hunter, Lang.get("scene.forestc1.waaaah")).sound("cry");
             hunter.animation.play("sitting");
             hunterIsReleased = true;
         }
@@ -159,7 +160,7 @@ class ForestC1 extends Scene
     {
         if (Std.is(item, RustyKnife))
         {
-            Dialog.show(this, sherlock, "Hmm, o que fazer com uma faca sem fio?").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.forestc1.rusty_knife")).sound("wonder");
         }
     }
 

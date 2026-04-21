@@ -7,6 +7,7 @@ import flixel.FlxState;
 import haxe.Constraints.Function;
 
 import engine.Assets;
+import Lang;
 class Menu extends FlxState
 {
 
@@ -19,7 +20,7 @@ class Menu extends FlxState
     public var background : FlxSprite;
     public var optionIndex : Array<Dynamic> = [];
     public var options : Map<String, MenuOption> = new Map();
-    public var __DOLLAR__options : FlxGroup = new FlxGroup();
+    public var _options : FlxGroup = new FlxGroup();
 
     public var selectedOption : Int = -1;
 
@@ -33,17 +34,17 @@ class Menu extends FlxState
 
         baseY = buttonOffset[1];
         createOptions();
-        add(__DOLLAR__options);
+        add(_options);
     }
 
     public function createOptions() : Void
     {
-        addOption("Jogar", function() : Void
+        addOption("play", function() : Void
                 {
                     Game.showPrologue();
                 });
 
-        addOption("Créditos", function() : Void
+        addOption("credits", function() : Void
                 {
                     Game.openCredits();
                 });
@@ -67,7 +68,7 @@ class Menu extends FlxState
 
         options[name] = option;
         optionIndex.push(name);
-        __DOLLAR__options.add(option);
+        _options.add(option);
 
         baseY += buttonHeight;
     }

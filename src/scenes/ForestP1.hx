@@ -14,6 +14,7 @@ import items.Scissors;
 import items.ScissorsPiece2;
 import props.Bush;
 import props.Rock;
+import Lang;
 
 class ForestP1 extends Scene
 {
@@ -39,10 +40,10 @@ class ForestP1 extends Scene
         
         if (!visited)
         {
-            Dialog.show(this, sherlock, "As pegadas parecem levar até essa clareira", "default", "bottom").sound("dialog");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp1.footprints_lead"), "default", "bottom").sound("dialog");
         }
         
-        Portal.placeOnScene(this, "Clareira", 65, 10, 200, 300, ForestC1);
+        Portal.placeOnScene(this, Lang.get("portal.clearing"), 65, 10, 200, 300, ForestC1);
         
         Prop.placeOnScene(this, new Rock(), 155, 325);
         
@@ -58,11 +59,11 @@ class ForestP1 extends Scene
         
         if (ForestTree.cleared)
         {
-            Portal.placeOnScene(this, "Floresta", 700, 0, 100, 600, EndingScene);
+            Portal.placeOnScene(this, Lang.get("portal.forest"), 700, 0, 100, 600, EndingScene);
         }
         else
         {
-            Portal.placeOnScene(this, "Floresta", 700, 0, 100, 600, StartingScene);
+            Portal.placeOnScene(this, Lang.get("portal.forest"), 700, 0, 100, 600, StartingScene);
         }
         
         visited = true;
@@ -72,13 +73,13 @@ class ForestP1 extends Scene
     {
         if (Std.is(prop, Bush))
         {
-            Dialog.show(this, sherlock, "Precisamos de algo para liberar o caminho... Hmm...", "default", "bottom").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp1.need_clear_path"), "default", "bottom").sound("wonder");
             return;
         }
         
         if (Std.is(prop, Rock))
         {
-            Dialog.show(this, sherlock, "Mas que pedra pontuda... e afiada... hmm...", "default", "bottom").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp1.sharp_rock"), "default", "bottom").sound("wonder");
         }
     }
     
@@ -86,14 +87,14 @@ class ForestP1 extends Scene
     {
         if (Std.is(prop, Bush) && Std.is(item, Scissors))
         {
-            Dialog.show(this, sherlock, "Elementar, meu caro Epson!").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp1.elementary")).sound("surprise");
             prop.remove();
             return;
         }
         
         if (Std.is(prop, Rock) && Std.is(item, RustyKnife))
         {
-            Dialog.show(this, sherlock, "Brilhante idéia, Epson! A faca ficou afiadíssima!", "default", "bottom").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp1.knife_sharpened"), "default", "bottom").sound("surprise");
             item.consume();
             Inventory.addToInventory(new Knife());
             return;
@@ -101,18 +102,18 @@ class ForestP1 extends Scene
         
         if (Std.is(prop, Rock) && Std.is(item, Knife))
         {
-            Dialog.show(this, sherlock, "A faca já está bem afiada!", "default", "bottom").sound("taunt");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp1.knife_sharp"), "default", "bottom").sound("taunt");
             return;
         }
         
-        Dialog.show(this, sherlock, "O que você está fazendo, Epson?").sound("taunt");
+        Dialog.show(this, sherlock, Lang.get("scene.forestp1.what_doing")).sound("taunt");
     }
-    
+
     override public function onItemPick(item : Item) : Void
     {
         if (Std.is(item, ScissorsPiece2))
         {
-            Dialog.show(this, sherlock, "O que fazer com MEIA tesoura!?").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.forestp1.half_scissors")).sound("wonder");
         }
     }
 

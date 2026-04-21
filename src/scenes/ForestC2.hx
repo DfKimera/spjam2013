@@ -12,6 +12,7 @@ import items.Key1;
 import items.Liana;
 import items.Plank;
 import props.Hole;
+import Lang;
 
 class ForestC2 extends Scene
 {
@@ -40,8 +41,8 @@ class ForestC2 extends Scene
         sherlock = new Sherlock();
         hunter = new Hunter2();
         
-        Portal.placeOnScene(this, "Vilarejo", 260, 0, 290, 400, VillageScene);
-        Portal.placeOnScene(this, "Floresta", 0, 540, 800, 60, ForestP2);
+        Portal.placeOnScene(this, Lang.get("portal.village"), 260, 0, 290, 400, VillageScene);
+        Portal.placeOnScene(this, Lang.get("portal.forest"), 0, 540, 800, 60, ForestP2);
         
         Prop.placeOnScene(this, new Hole(), 440, 440);
         
@@ -64,22 +65,22 @@ class ForestC2 extends Scene
         {
             if (!cleared)
             {
-                Dialog.show(this, hunter, "Me tirem daqui!!").sound("hole");
-                Dialog.show(this, sherlock, "Como podemos ajudá-lo, Epson?").sound("wonder");
+                Dialog.show(this, hunter, Lang.get("scene.forestc2.get_us_out")).sound("hole");
+                Dialog.show(this, sherlock, Lang.get("scene.forestc2.how_help")).sound("wonder");
             }
             else
             {
-                Dialog.show(this, sherlock, "É um buraco bem fundo!").sound("dialog");
+                Dialog.show(this, sherlock, Lang.get("scene.forestc2.deep_hole")).sound("dialog");
             }
             return;
         }
         
         if (Std.is(prop, Hunter2))
         {
-            Dialog.show(this, hunter, "Phew! Obrigado!!").sound("dialog");
-            Dialog.show(this, sherlock, "Pois bem! Me diga, quem foi que te colocou aí?").sound("dialog");
-            Dialog.show(this, hunter, "Ele me pegou de costas, não consegui ver...").sound("dialog");
-            var dialog : Dialog = Dialog.show(this, hunter, "Mas percebi que era um anão... ou uma criança...").sound("dialog");
+            Dialog.show(this, hunter, Lang.get("scene.forestc2.phew")).sound("dialog");
+            Dialog.show(this, sherlock, Lang.get("scene.forestc2.who_put")).sound("dialog");
+            Dialog.show(this, hunter, Lang.get("scene.forestc2.from_behind")).sound("dialog");
+            var dialog : Dialog = Dialog.show(this, hunter, Lang.get("scene.forestc2.dwarf")).sound("dialog");
             Sketch.show(this, "short", dialog);
         }
     }
@@ -92,20 +93,20 @@ class ForestC2 extends Scene
             {
                 Prop.placeOnScene(this, hunter, 520, 410);
                 hunter.ID = 0x7FFFFFFF - 100;
-                Dialog.show(this, hunter, "PHEW!").sound("dialog");
-                Dialog.show(this, sherlock, "Muito bem, Epson!").sound("surprise");
-                
+                Dialog.show(this, hunter, Lang.get("scene.forestc2.phew_short")).sound("dialog");
+                Dialog.show(this, sherlock, Lang.get("scene.forestc2.well_done")).sound("surprise");
+
                 if (ForestC1.cleared)
                 {
                     Inventory.addToInventory(new Key1());
-                    Dialog.show(this, hunter, "Aqui, tome a chave do portão da cidade. Ele deve ter se escondido na mata fechada.").sound("dialog");
+                    Dialog.show(this, hunter, Lang.get("scene.forestc2.take_key")).sound("dialog");
                 }
                 
                 cleared = true;
             }
             else
             {
-                Dialog.show(this, sherlock, "Não vejo como isso poderia ajudá-lo, Epson.").sound("taunt");
+                Dialog.show(this, sherlock, Lang.get("scene.forestc2.no_help")).sound("taunt");
             }
         }
     }
@@ -114,7 +115,7 @@ class ForestC2 extends Scene
     {
         if (Std.is(item, Plank))
         {
-            Dialog.show(this, sherlock, "Você daria um bom lixeiro, Epson...").sound("taunt");
+            Dialog.show(this, sherlock, Lang.get("scene.forestc2.garbage_collector")).sound("taunt");
         }
     }
 

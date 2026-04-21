@@ -12,23 +12,23 @@ class MenuOption extends FlxExtendedSprite
     private var isOver : Bool = false;
     private var playedSFX : Bool = false;
     
-    public function new(item : String, onTriggerHandler : Function)
+    public function new(animId : String, onTriggerHandler : Function)
     {
         super(0, 0);
 
         this.loadGraphic(Assets.graphic(SPRITE), true, 280, 60);
-        
+
         this.onTriggerHandler = onTriggerHandler;
         this.mouseReleasedCallback = this.onClick;
-        this.name = item;
-        
-        switch (item)
+        this.name = animId;
+
+        switch (animId)
         {
-            case "Jogar":
+            case "play":
                 this.animation.add("off", [0]);
                 this.animation.add("on", [1]);
 
-            case "Créditos":
+            case "credits":
                 this.animation.add("off", [2]);
                 this.animation.add("on", [3]);
         }

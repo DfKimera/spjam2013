@@ -14,6 +14,7 @@ import items.RopeHook;
 import props.Glint;
 import props.Rack;
 import props.RackUsed;
+import Lang;
 
 class ForestTree extends Scene
 {
@@ -62,7 +63,7 @@ class ForestTree extends Scene
             hunter.animation.play("released");
         }
 
-        Portal.placeOnScene(this, "Vilarejo", 0, 540, 800, 60, VillageScene);
+        Portal.placeOnScene(this, Lang.get("portal.village"), 0, 540, 800, 60, VillageScene);
         
         visited = true;
     }
@@ -75,27 +76,27 @@ class ForestTree extends Scene
             Prop.placeOnScene(this, new RackUsed(), 630, 240);
             prop.remove();
             rackUsed = true;
-            Dialog.show(this, sherlock, "Epson, pare de pegar coisas que não são suas! Por acaso é um ladrão?").sound("taunt");
+            Dialog.show(this, sherlock, Lang.get("scene.foresttree.stop_taking")).sound("taunt");
             return;
         }
         
         if (Std.is(prop, Glint))
         {
-            Dialog.show(this, sherlock, "Olhos de lince, Epson! Mas, como vamos pegá-la?").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.foresttree.keen_eyes")).sound("surprise");
             return;
         }
         
         if (Std.is(prop, Hunter3) && !cleared)
         {
-            Dialog.show(this, hunter, "Me tirem daqui!!").sound("jailed");
+            Dialog.show(this, hunter, Lang.get("scene.foresttree.get_me_out")).sound("jailed");
             return;
         }
         
         if (Std.is(prop, Hunter3) && cleared)
         {
-            var dialog : Dialog = Dialog.show(this, hunter, "Aquele maldito, com os pés virados pra trás! Ele que me trancou aqui!").sound("dialog");
+            var dialog : Dialog = Dialog.show(this, hunter, Lang.get("scene.foresttree.backwards_feet")).sound("dialog");
             Sketch.show(this, "feet", dialog);
-            Dialog.show(this, sherlock, "Pés virados!? Epson, estavamos andando ao contrário desde o começo!").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.foresttree.backwards_all_along")).sound("surprise");
         }
     }
     
@@ -107,13 +108,13 @@ class ForestTree extends Scene
             item.consume();
             Inventory.addToInventory(new Key2());
             keyObtained = true;
-            Dialog.show(this, sherlock, "Excelente mira, Epson!").sound("surprise");
+            Dialog.show(this, sherlock, Lang.get("scene.foresttree.excellent_aim")).sound("surprise");
             return;
         }
         
         if (Std.is(item, Hook) && Std.is(prop, Glint))
         {
-            Dialog.show(this, sherlock, "O gancho não alcança... precisamos dar um jeito de conseguir alcançar e puxar de volta...").sound("wonder");
+            Dialog.show(this, sherlock, Lang.get("scene.foresttree.hook_too_short")).sound("wonder");
             return;
         }
         
@@ -122,11 +123,11 @@ class ForestTree extends Scene
             cleared = true;
             hunter.animation.play("released");
             item.consume();
-            Dialog.show(this, hunter, "Ahh! Obrigado!").sound("dialog");
+            Dialog.show(this, hunter, Lang.get("scene.foresttree.thank_you")).sound("dialog");
             return;
         }
         
-        Dialog.show(this, sherlock, "Não vejo como isso poderia ajudá-lo, Epson...").sound("taunt");
+        Dialog.show(this, sherlock, Lang.get("scene.foresttree.no_help")).sound("taunt");
     }
 
     public function new()
