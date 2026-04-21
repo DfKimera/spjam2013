@@ -3,7 +3,7 @@ package scenes {
 	import engine.Cursor;
 	import engine.UIScene;
 
-	import org.flixel.FlxG;
+	import flixel.FlxG;
 
 	public class CreditsScene extends UIScene {
 

@@ -2,8 +2,8 @@ package {
 	import engine.*;
 	import flash.utils.setTimeout;
 
-	import org.flixel.FlxG;
-	import org.flixel.FlxSprite;
+	import flixel.FlxG;
+	import flixel.FlxSprite;
 
 	public class Sketch extends FlxSprite {
 

@@ -1,5 +1,5 @@
 package engine {
-	import org.flixel.FlxG;
+	import flixel.FlxG;
 
 	public class SFX {
 

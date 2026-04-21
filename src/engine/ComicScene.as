@@ -1,7 +1,7 @@
 package engine {
 
-	import org.flixel.FlxG;
-	import org.flixel.FlxSprite;
+	import flixel.FlxG;
+	import flixel.FlxSprite;
 
 	public class ComicScene extends UIScene {
 

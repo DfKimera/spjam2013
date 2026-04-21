@@ -2,9 +2,9 @@ package engine {
 
 	import flash.utils.getQualifiedClassName;
 
-	import org.flixel.FlxBasic;
-	import org.flixel.FlxG;
-	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+	import flixel.FlxBasic;
+	import flixel.FlxG;
+	import flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Item extends FlxBasic {
 

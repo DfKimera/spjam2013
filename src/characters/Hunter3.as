@@ -2,7 +2,7 @@ package characters {
 
 	import engine.Character;
 
-	import org.flixel.FlxG;
+	import flixel.FlxG;
 
 	public class Hunter3 extends Character {
 

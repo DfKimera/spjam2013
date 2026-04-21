@@ -1,7 +1,7 @@
 package engine {
-	import org.flixel.FlxG;
-	import org.flixel.FlxSound;
-	import org.flixel.FlxSprite;
+	import flixel.FlxG;
+	import flixel.FlxSound;
+	import flixel.FlxSprite;
 
 	public class Character extends Prop {
 
