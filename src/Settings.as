@@ -1,7 +1,7 @@
 package {
 
 	import engine.UIScene;
-	import org.flixel.FlxText;
+	import flixel.FlxText;
 
 	public class Settings extends UIScene {
 

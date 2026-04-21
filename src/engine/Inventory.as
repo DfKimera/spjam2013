@@ -2,9 +2,9 @@ package engine {
 
 	import flash.utils.getQualifiedClassName;
 
-	import org.flixel.FlxG;
-	import org.flixel.FlxGroup;
-	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+	import flixel.FlxG;
+	import flixel.FlxGroup;
+	import flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Inventory extends FlxGroup {
 

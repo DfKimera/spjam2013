@@ -2,10 +2,10 @@ package {
 
 	import engine.SFX;
 
-	import org.flixel.FlxG;
-	import org.flixel.FlxGroup;
-	import org.flixel.FlxSprite;
-	import org.flixel.FlxState;
+	import flixel.FlxG;
+	import flixel.FlxGroup;
+	import flixel.FlxSprite;
+	import flixel.FlxState;
 
 	public class Menu extends FlxState {
 

@@ -2,13 +2,13 @@ package engine {
 
 	import flash.utils.setTimeout;
 
-	import org.flixel.FlxG;
-	import org.flixel.FlxGroup;
-	import org.flixel.FlxSound;
-	import org.flixel.FlxSprite;
-	import org.flixel.FlxText;
-	import org.flixel.FlxTimer;
-	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+	import flixel.FlxG;
+	import flixel.FlxGroup;
+	import flixel.FlxSound;
+	import flixel.FlxSprite;
+	import flixel.FlxText;
+	import flixel.FlxTimer;
+	import flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Dialog extends FlxGroup {
 

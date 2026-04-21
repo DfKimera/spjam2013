@@ -1,7 +1,7 @@
 package engine {
 
-	import org.flixel.FlxG;
-	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+	import flixel.FlxG;
+	import flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Prop extends FlxExtendedSprite {
 

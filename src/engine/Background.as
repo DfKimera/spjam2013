@@ -1,6 +1,6 @@
 package engine {
-	import org.flixel.FlxSprite;
-	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+	import flixel.FlxSprite;
+	import flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Background extends FlxExtendedSprite {
 

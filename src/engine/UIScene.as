@@ -1,6 +1,6 @@
 package engine {
 
-	import org.flixel.FlxG;
+	import flixel.FlxG;
 
 	public class UIScene extends Scene {
 

@@ -2,8 +2,8 @@ package {
 
 	import com.greensock.TweenLite;
 
-	import org.flixel.FlxGroup;
-	import org.flixel.FlxSprite;
+	import flixel.FlxGroup;
+	import flixel.FlxSprite;
 
 	public class Utils {
 

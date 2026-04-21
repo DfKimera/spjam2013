@@ -1,7 +1,7 @@
 package {
 	import engine.SFX;
 
-	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+	import flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class MenuOption extends FlxExtendedSprite {
 

@@ -1,9 +1,9 @@
 package engine {
 
-	import org.flixel.FlxG;
-	import org.flixel.FlxGroup;
-	import org.flixel.FlxState;
-	import org.flixel.plugin.photonstorm.FlxExtendedSprite;
+	import flixel.FlxG;
+	import flixel.FlxGroup;
+	import flixel.FlxState;
+	import flixel.plugin.photonstorm.FlxExtendedSprite;
 
 	public class Scene extends FlxState {
 

@@ -3,7 +3,7 @@ package characters {
 	import engine.Character;
 	import engine.Item;
 
-	import org.flixel.FlxG;
+	import flixel.FlxG;
 
 	public class Curupira extends Character {
 
