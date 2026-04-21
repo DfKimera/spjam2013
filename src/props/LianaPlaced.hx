@@ -1,18 +1,16 @@
 package props;
 
 import engine.Assets;
-import engine.Item;
 import engine.Prop;
+import engine.structs.AssetRegistry;
 
-class LianaPlaced extends Prop
-{
-    
-    public static final SPRITE = "assets/prop_liana.png";
-    
-    public function new()
-    {
-        super();
-        loadGraphic(Assets.graphic(SPRITE));
-    }
+class LianaPlaced extends Prop {
+
+	public function new() {
+		AssetRegistry.get()
+			.registerSprite('liana_placed.sprite', "assets/prop_liana.png");
+
+		super();
+		loadGraphic(AssetRegistry.graphic('liana_placed.sprite'));
+	}
 }
-

@@ -44,7 +44,7 @@ class Portal extends Prop
     {
         super._onInteract(spr, x, y);
         
-        SFX.play("click");
+        SFX.play("sfx.click");
         
         if (Std.is(this.nextScene, Class))
         {

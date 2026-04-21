@@ -1,18 +1,16 @@
 package props;
 
 import engine.Assets;
-import engine.Item;
 import engine.Prop;
+import engine.structs.AssetRegistry;
 
-class DryLeavesCushion extends Prop
-{
-    
-    public static final SPRITE = "assets/item_dryleaves_placed.png";
-    
-    public function new()
-    {
-        super();
-        loadGraphic(Assets.graphic(SPRITE));
-    }
+class DryLeavesCushion extends Prop {
+
+	public function new() {
+		AssetRegistry.get()
+			.registerSprite('dryleaves_cushion.sprite', "assets/item_dryleaves_placed.png");
+
+		super();
+		loadGraphic(AssetRegistry.graphic('dryleaves_cushion.sprite'));
+	}
 }
-

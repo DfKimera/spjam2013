@@ -29,7 +29,7 @@ class Prop extends FlxExtendedSprite
             }
         }
         
-        SFX.play("click");
+        SFX.play("sfx.click");
         
         this.onInteract();
         
@@ -43,7 +43,7 @@ class Prop extends FlxExtendedSprite
     {
         trace("Used item on prop", this, item);
         
-        SFX.play("use");
+        SFX.play("sfx.use");
         
         item._onUse();
         this.onItemUse(item);

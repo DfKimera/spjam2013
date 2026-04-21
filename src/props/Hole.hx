@@ -1,18 +1,16 @@
 package props;
 
 import engine.Assets;
-import engine.Item;
 import engine.Prop;
+import engine.structs.AssetRegistry;
 
-class Hole extends Prop
-{
-    
-    public static final SPRITE = "assets/prop_hole.png";
-    
-    public function new()
-    {
-        super();
-        loadGraphic(Assets.graphic(SPRITE));
-    }
+class Hole extends Prop {
+
+	public function new() {
+		AssetRegistry.get()
+			.registerSprite('hole.sprite', "assets/prop_hole.png");
+
+		super();
+		loadGraphic(AssetRegistry.graphic('hole.sprite'));
+	}
 }
-
