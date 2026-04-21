@@ -1,11 +1,13 @@
 package;
 
-import flixel.FlxSprite;
+import Lang;
+import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.FlxSprite;
 import engine.Assets;
 import engine.ui.UIMenu;
 
-class Menu extends UIMenu {
+class LanguageSelect extends UIMenu {
 
 	public static final BACKGROUND_SPRITE = "assets/menu_background.jpg";
 
@@ -18,14 +20,12 @@ class Menu extends UIMenu {
 
 		super.create();
 
-		Game.playMusic("menu");
-
-		addOption(Lang.get("menu.play"), 0, 0, function() {
-			Game.showPrologue();
+		addOption("Português (BR)", 0, 0, function() {
+			selectLanguage("pt_BR");
 		});
 
-		addOption(Lang.get("menu.credits"), 0, 100, function() {
-			Game.openCredits();
+		addOption("English", 0, 100, function() {
+			selectLanguage("en");
 		});
 	}
 
@@ -33,4 +33,8 @@ class Menu extends UIMenu {
 		return new FlxPoint(260, 300);
 	}
 
+	private function selectLanguage(langCode:String):Void {
+		Lang.load(langCode);
+		FlxG.switchState(new Menu());
+	}
 }
