@@ -45,11 +45,16 @@ class Item extends FlxBasic
 
     public function getIcon() : FlxExtendedSprite
     {
-        if (icon == null || !icon.alive)
+        if (icon == null)
         {
             icon = generateIcon();
         }
         return icon;
+    }
+
+    public function invalidateIcon() : Void
+    {
+        icon = null;
     }
 
     public function onPick() : Void{}
@@ -119,7 +124,7 @@ class Item extends FlxBasic
     {
         if (Inventory.hasItem(item))
         {
-            trace("Skipping scene placement of item: ", item, "(player already picked)");
+            trace("Skipping scene placement of item: ", Type.getClass(item), "(player already picked)");
             return item;
         }
 
