@@ -20,11 +20,11 @@ class LanguageSelect extends UIMenu {
 
 		super.create();
 
-		addOption("Português (BR)", 0, 0, function() {
+		addOption("Português (BR)", 0, 40, function() {
 			selectLanguage("pt_BR");
 		});
 
-		addOption("English", 0, 100, function() {
+		addOption("English", 0, 80, function() {
 			selectLanguage("en");
 		});
 	}

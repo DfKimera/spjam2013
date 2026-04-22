@@ -63,7 +63,7 @@ class Item extends FlxBasic
 
     public function consume() : Void
     {
-        trace("Item consumed: ", this);
+        trace("Item consumed: ", Type.getClass(this));
 
         Inventory.releaseItemOnCursor();
 

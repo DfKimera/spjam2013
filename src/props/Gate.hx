@@ -1,6 +1,5 @@
 package props;
 
-import engine.Assets;
 import engine.Item;
 import engine.Prop;
 import engine.structs.AssetRegistry;
@@ -12,9 +11,11 @@ class Gate extends Prop {
 			.registerSprite('gate.sprite', "assets/prop_gate.png");
 
 		super();
-		loadGraphic(AssetRegistry.graphic('gate.sprite'), true, 149, 339);
+		loadGraphic(AssetRegistry.graphic('gate.sprite'), true, 148, 339);
+
 		animation.add("open", [0]);
 		animation.add("closed", [1]);
+
 		animation.play("closed");
 	}
 
@@ -22,5 +23,9 @@ class Gate extends Prop {
 	}
 
 	override public function onItemUse(item:Item):Void {
+	}
+
+	public function setOpenState(isGateOpen:Bool):Void {
+		this.animation.play(isGateOpen ? "open" : "closed");
 	}
 }

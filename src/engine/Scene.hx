@@ -42,12 +42,12 @@ class Scene extends FlxState {
 	 * If overridden, don't forget to call super.create();.
 	 */
 	override public function create():Void {
-		trace("Creating scene: ", this);
+		trace("Creating scene: ", Type.getClass(this));
 
 		this.game = Game.instance;
 
 		if (background != null) {
-			trace("Scene has background: ", background, background.ID);
+			trace("Scene has background: ", Type.getClass(background.graphic), background.ID);
 			add(background);
 		}
 
@@ -56,10 +56,6 @@ class Scene extends FlxState {
 		add(invLayer);
 		add(ui);
 		add(dialog);
-
-		trace("Done, displaying...");
-
-		var scene:Scene = this;
 
 		if (hasInventoryEnabled()) {
 			inventory = new Inventory(this);
