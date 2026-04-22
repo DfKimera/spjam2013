@@ -1,6 +1,5 @@
 package engine;
 
-import engine.Assets;
 import flixel.FlxG;
 
 class Cursor {
@@ -46,15 +45,15 @@ class Cursor {
 		}
 
 		if (shouldUseSkip) {
-			FlxG.mouse.load(Assets.graphic(SPRITE_SKIP));
+			FlxG.mouse.load(SPRITE_SKIP);
 		} else if (shouldUseHand && !Inventory.isMouseOver()) {
-			FlxG.mouse.load(Assets.graphic(SPRITE_HAND));
+			FlxG.mouse.load(SPRITE_HAND);
 		} else if (shouldUseDoor && !Inventory.isMouseOver()) {
-			FlxG.mouse.load(Assets.graphic(SPRITE_DOOR));
+			FlxG.mouse.load(SPRITE_DOOR);
 		} else if (shouldUseEye && !Inventory.isMouseOver()) {
-			FlxG.mouse.load(Assets.graphic(SPRITE_EYE));
+			FlxG.mouse.load(SPRITE_EYE);
 		} else {
-			FlxG.mouse.load(Assets.graphic(SPRITE_ARROW));
+			FlxG.mouse.load(SPRITE_ARROW);
 		}
 	}
 
