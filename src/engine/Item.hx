@@ -45,7 +45,7 @@ class Item extends FlxBasic
 
     public function getIcon() : FlxExtendedSprite
     {
-        if (icon == null)
+        if (icon == null || !icon.alive)
         {
             icon = generateIcon();
         }
