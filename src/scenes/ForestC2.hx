@@ -79,7 +79,8 @@ class ForestC2 extends Scene {
 		if (Std.is(prop, Hole)) {
 			if (Std.is(item, Liana) && !cleared) {
 				Prop.placeOnScene(this, hunter, 520, 410);
-				hunter.ID = 0x7FFFFFFF - 100;
+				Prop.bringToFront(hunter, 100);
+
 				Dialog.show(this, hunter, Lang.get("scene.forestc2.phew_short")).sound("hunter2.sound.dialog");
 				Dialog.show(this, sherlock, Lang.get("scene.forestc2.well_done")).sound("sherlock.sound.surprise");
 

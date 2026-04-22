@@ -51,7 +51,7 @@ class Dialog extends FlxGroup {
 	public function new(scene:Scene, character:Character, message:String, expression:String = "default", position:String = "top") {
 		super();
 
-		trace("Dialog: ", scene, character, message, expression);
+		trace("Dialog: ", Type.getClass(scene), Type.getClass(character), message, expression);
 
 		this.scene = scene;
 		this.character = character;
