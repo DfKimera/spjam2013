@@ -24,6 +24,7 @@ class ForestP1 extends Scene
     public var sherlock : Sherlock = new Sherlock();
 
     public static var visited : Bool = false;
+    public static var clearedBush : Bool = false;
 
     override public function prepare() : Void
     {
@@ -47,7 +48,7 @@ class ForestP1 extends Scene
 
         Prop.placeOnScene(this, new Rock(), 155, 325);
 
-        if (!ForestC1.visited)
+        if (!clearedBush)
         {
             Prop.placeOnScene(this, new Bush(), 60, 0);
         }
@@ -88,6 +89,7 @@ class ForestP1 extends Scene
         if (Std.is(prop, Bush) && Std.is(item, Scissors))
         {
             Dialog.show(this, sherlock, Lang.get("scene.forestp1.elementary")).sound("sherlock.sound.surprise");
+            clearedBush = true;
             prop.remove();
             return;
         }

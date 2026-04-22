@@ -9,7 +9,7 @@ import engine.ui.UIMenu;
 
 class LanguageSelect extends UIMenu {
 
-	public static final BACKGROUND_SPRITE = "assets/menu_background.jpg";
+	public static final BACKGROUND_SPRITE = "assets/choice_background.jpg";
 
 	public var background:FlxSprite;
 
@@ -35,6 +35,6 @@ class LanguageSelect extends UIMenu {
 
 	private function selectLanguage(langCode:String):Void {
 		Lang.load(langCode);
-		FlxG.switchState(new Menu());
+		Game.transitionToScene(new Menu());
 	}
 }

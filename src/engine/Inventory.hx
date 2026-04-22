@@ -54,7 +54,15 @@ class Inventory extends FlxGroup
         
         add(background);
         add(_items);
-        
+
+        for (itemType in Inventory.items.keys())
+        {
+            if (Inventory.items[itemType] != null)
+            {
+                Inventory.items[itemType].invalidateIcon();
+            }
+        }
+
         this._generateGrid();
     }
     
@@ -165,7 +173,7 @@ class Inventory extends FlxGroup
 		 */
     public static function removeFromInventory(item : Item) : Void
     {
-        Inventory.items.remove(Type.getClassName(Type.getClass(item)));
+        Inventory.items[Type.getClassName(Type.getClass(item))] = null;
         invGrid._redrawGrid();
     }
     
@@ -176,8 +184,7 @@ class Inventory extends FlxGroup
 		 */
     public static function hasItem(item : Item) : Bool
     {
-        var i : Item = Inventory.items[Type.getClassName(Type.getClass(item))];
-        return (i != null);
+        return Inventory.items.exists(Type.getClassName(Type.getClass(item)));
     }
     
     /**
@@ -187,7 +194,7 @@ class Inventory extends FlxGroup
 		 */
     public static function hasItemOfType(type : String) : Bool
     {
-        return Inventory.items.exists(type) && Inventory.items[type] != null;
+        return Inventory.items.exists(type);
     }
     
     /**

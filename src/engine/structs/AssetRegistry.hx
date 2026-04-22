@@ -24,13 +24,13 @@ class AssetRegistry {
 	}
 
 	public function registerSprite(name: String, path: String): AssetRegistry {
-		trace("AssetRegistry: SPRITE ", name, path);
+		//trace("AssetRegistry: SPRITE ", name, path);
 		_sprites[name] = new AssetReference(name, path, "sound");
 		return this;
 	}
 
 	public function registerSound(name: String, path: String): AssetRegistry {
-		trace("AssetRegistry: SOUND ", name, path);
+		//trace("AssetRegistry: SOUND ", name, path);
 		_sounds[name] = new AssetReference(name, path, "sound");
 		return this;
 	}
