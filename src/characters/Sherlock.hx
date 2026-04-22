@@ -21,6 +21,6 @@ class Sherlock extends Character {
 
 	override public function setCharacterInfo():Void {
 		this.characterName = "Xerox Holmes";
-		this.setPortraits({idle: [AssetRegistry.spritePath('sherlock.portrait.default'), (false : Dynamic)]});
+		addPortrait("default", AssetRegistry.spritePath('sherlock.portrait.default'), false);
 	}
 }

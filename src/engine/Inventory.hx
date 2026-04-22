@@ -118,7 +118,7 @@ class Inventory extends FlxGroup
     
     private function _show() : Void
     {
-        trace("Opening inventory: ", this, this.scene);
+        trace("Opening inventory: ", _items.members);
         this.scene.invLayer.add(this);
         this._isOpen = true;
         this.button.loadGraphic(Assets.graphic(BUTTON_OPEN));
@@ -126,7 +126,7 @@ class Inventory extends FlxGroup
     
     private function _hide() : Void
     {
-        trace("Hiding inventory: ", this, this.scene);
+        trace("Hiding inventory");
         this.scene.invLayer.remove(this);
         this._isOpen = false;
         this.button.loadGraphic(Assets.graphic(BUTTON));
@@ -165,7 +165,7 @@ class Inventory extends FlxGroup
 		 */
     public static function removeFromInventory(item : Item) : Void
     {
-        Inventory.items[Type.getClassName(Type.getClass(item))] = null;
+        Inventory.items.remove(Type.getClassName(Type.getClass(item)));
         invGrid._redrawGrid();
     }
     
@@ -187,7 +187,7 @@ class Inventory extends FlxGroup
 		 */
     public static function hasItemOfType(type : String) : Bool
     {
-        return Inventory.items.exists(type);
+        return Inventory.items.exists(type) && Inventory.items[type] != null;
     }
     
     /**
